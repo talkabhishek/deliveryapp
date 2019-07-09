@@ -18,13 +18,14 @@
 		61F94BFA22D465100069E7FE /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BF822D465100069E7FE /* DatabaseHelper.swift */; };
 		61F94BFB22D465100069E7FE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BF922D465100069E7FE /* CoreDataStack.swift */; };
 		61F94BFE22D4663E0069E7FE /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */; };
-		61F94BFF22D4663E0069E7FE /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BFD22D4663E0069E7FE /* UIAlertControllerExtension.swift */; };
 		61F94C0422D466570069E7FE /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0122D466570069E7FE /* DeliveryDetailViewController.swift */; };
 		61F94C0522D466570069E7FE /* DeliveryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0222D466570069E7FE /* DeliveryListViewController.swift */; };
 		61F94C0622D466570069E7FE /* DeliverItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0322D466570069E7FE /* DeliverItemTableViewCell.swift */; };
 		61F94C0922D4666F0069E7FE /* DeliveryItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0722D4666F0069E7FE /* DeliveryItemListViewModel.swift */; };
 		61F94C0A22D4666F0069E7FE /* DeliveryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0822D4666F0069E7FE /* DeliveryItemViewModel.swift */; };
 		61F94C0C22D467D30069E7FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61F94C0B22D467D30069E7FE /* GoogleService-Info.plist */; };
+		61F94C1022D46D0D0069E7FE /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = 61F94C0F22D46D0D0069E7FE /* response.json */; };
+		9CFABE83AD9E90ADA5829A65 /* Pods_DeliveryAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658D7DEE6E87195D0CFCB0E3 /* Pods_DeliveryAppTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,14 +54,17 @@
 		61F94BF822D465100069E7FE /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		61F94BF922D465100069E7FE /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
-		61F94BFD22D4663E0069E7FE /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		61F94C0122D466570069E7FE /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		61F94C0222D466570069E7FE /* DeliveryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryListViewController.swift; sourceTree = "<group>"; };
 		61F94C0322D466570069E7FE /* DeliverItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverItemTableViewCell.swift; sourceTree = "<group>"; };
 		61F94C0722D4666F0069E7FE /* DeliveryItemListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryItemListViewModel.swift; sourceTree = "<group>"; };
 		61F94C0822D4666F0069E7FE /* DeliveryItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryItemViewModel.swift; sourceTree = "<group>"; };
 		61F94C0B22D467D30069E7FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		61F94C0F22D46D0D0069E7FE /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
+		658D7DEE6E87195D0CFCB0E3 /* Pods_DeliveryAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeliveryAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8E87A9A7B9F783D4BEFA37C /* Pods-DeliveryAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryAppTests.release.xcconfig"; path = "Target Support Files/Pods-DeliveryAppTests/Pods-DeliveryAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		D1493BA4CBD108AC150DA4D2 /* Pods-DeliveryApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryApp.debug.xcconfig"; path = "Target Support Files/Pods-DeliveryApp/Pods-DeliveryApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D1B5D973B6A97B4B71692C92 /* Pods-DeliveryAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryAppTests.debug.xcconfig"; path = "Target Support Files/Pods-DeliveryAppTests/Pods-DeliveryAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DC5B1B6910C8FE88D721C60A /* Pods-DeliveryApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryApp.release.xcconfig"; path = "Target Support Files/Pods-DeliveryApp/Pods-DeliveryApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CFABE83AD9E90ADA5829A65 /* Pods_DeliveryAppTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				14C70C6BFB9CBB68A4ECEF95 /* Pods_DeliveryApp.framework */,
+				658D7DEE6E87195D0CFCB0E3 /* Pods_DeliveryAppTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,6 +102,8 @@
 			children = (
 				D1493BA4CBD108AC150DA4D2 /* Pods-DeliveryApp.debug.xcconfig */,
 				DC5B1B6910C8FE88D721C60A /* Pods-DeliveryApp.release.xcconfig */,
+				D1B5D973B6A97B4B71692C92 /* Pods-DeliveryAppTests.debug.xcconfig */,
+				C8E87A9A7B9F783D4BEFA37C /* Pods-DeliveryAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -140,6 +148,7 @@
 		61F94B5D22D45DB10069E7FE /* DeliveryAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				61F94C0F22D46D0D0069E7FE /* response.json */,
 				61F94B5E22D45DB10069E7FE /* DeliveryAppTests.swift */,
 				61F94B6022D45DB10069E7FE /* Info.plist */,
 			);
@@ -149,7 +158,6 @@
 		61F94B6922D45DC30069E7FE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				61F94BFD22D4663E0069E7FE /* UIAlertControllerExtension.swift */,
 				61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */,
 			);
 			path = Extension;
@@ -237,6 +245,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61F94B6622D45DB10069E7FE /* Build configuration list for PBXNativeTarget "DeliveryAppTests" */;
 			buildPhases = (
+				6AD2E55D642C2909DC01677C /* [CP] Check Pods Manifest.lock */,
 				61F94B5622D45DB10069E7FE /* Sources */,
 				61F94B5722D45DB10069E7FE /* Frameworks */,
 				61F94B5822D45DB10069E7FE /* Resources */,
@@ -304,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61F94C1022D46D0D0069E7FE /* response.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +356,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		6AD2E55D642C2909DC01677C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DeliveryAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		85FCB5B70C8557B262A210E6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -401,7 +433,6 @@
 				61F94BFA22D465100069E7FE /* DatabaseHelper.swift in Sources */,
 				61F94C0622D466570069E7FE /* DeliverItemTableViewCell.swift in Sources */,
 				61F94B4F22D45DB00069E7FE /* DeliveryApp.xcdatamodeld in Sources */,
-				61F94BFF22D4663E0069E7FE /* UIAlertControllerExtension.swift in Sources */,
 				61F94BFB22D465100069E7FE /* CoreDataStack.swift in Sources */,
 				61F94C0922D4666F0069E7FE /* DeliveryItemListViewModel.swift in Sources */,
 				61F94B4722D45DB00069E7FE /* AppDelegate.swift in Sources */,
@@ -596,6 +627,7 @@
 		};
 		61F94B6722D45DB10069E7FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1B5D973B6A97B4B71692C92 /* Pods-DeliveryAppTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -617,6 +649,7 @@
 		};
 		61F94B6822D45DB10069E7FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8E87A9A7B9F783D4BEFA37C /* Pods-DeliveryAppTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";

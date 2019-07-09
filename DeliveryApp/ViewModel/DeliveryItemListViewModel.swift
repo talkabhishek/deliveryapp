@@ -95,14 +95,6 @@ class DeliveryItemListViewModel: NSObject {
         }
     }
 
-    func getViewModel(At indexPath: IndexPath) -> DeliveryItemViewModel? {
-        if let item = DatabaseHelper.shared.fetchedhResultController.object(at:
-            indexPath) as? DeliveryItem {
-            return DeliveryItemViewModel(item: item)
-        }
-        return nil
-    }
-
     func setListValues() {
         if let items = (DatabaseHelper.shared.fetchedhResultController.sections![0].objects as? [DeliveryItem]) {
             for item in items {
