@@ -27,8 +27,8 @@ class DeliveryItemViewModel: NSObject {
     override var description: String {
         return item.desc ?? super.description
     }
-
 }
+// Confirm MKAnnotation for Map
 extension DeliveryItemViewModel: MKAnnotation {
     public var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: item.location?.lat ?? 0, longitude: item.location?.lng ?? 0)

@@ -15,6 +15,7 @@ class DeliveryListViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var deliveryItemListViewModel: DeliveryItemListViewModel!
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,22 +31,7 @@ class DeliveryListViewController: UIViewController {
         }
     }
 
-    private func updateDataSource() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.reloadData()
-    }
-
-    @objc func refreshBody(sender: Any) {
-        // Code to refresh table view
-        self.updateDataSource()
-        deliveryItemListViewModel.refreshList {
-            self.refreshControl.endRefreshing()
-            self.tableView.tableFooterView?.isHidden = true
-            self.updateDataSource()
-        }
-    }
-
+    // MARK: Setup view programatically
     func setupViews() {
         // Add table view
         tableView = UITableView()
@@ -69,8 +55,28 @@ class DeliveryListViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
 
+    // MARK: Helper function
+    // Pull to refresh action
+    @objc func refreshBody(sender: Any) {
+        // Code to refresh table view
+        self.updateDataSource()
+        deliveryItemListViewModel.refreshList {
+            self.refreshControl.endRefreshing()
+            self.tableView.tableFooterView?.isHidden = true
+            self.updateDataSource()
+        }
+    }
+
+    // Update tableview data
+    private func updateDataSource() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.reloadData()
+    }
+
 }
 
+// Table view DataSource function
 extension DeliveryListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return deliveryItemListViewModel.deliveryItemViewModels.count
@@ -88,6 +94,7 @@ extension DeliveryListViewController: UITableViewDataSource {
     }
 }
 
+// Table view Delegate function
 extension DeliveryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastSectionIndex = tableView.numberOfSections - 1

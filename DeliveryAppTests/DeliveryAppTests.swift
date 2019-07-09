@@ -81,13 +81,11 @@ class DeliveryAppTests: XCTestCase {
 
     func testLoadMoreData() {
         let promise = expectation(description: "Response should increase by 10")
-        deliveryItemListViewModel.clearList()
-        let count1 = deliveryItemListViewModel.deliveryItemViewModels.count
-        deliveryItemListViewModel.loadMore(With: count1/10) {
-            if self.deliveryItemListViewModel.deliveryItemViewModels.count == count1 + 10 {
+        let count = deliveryItemListViewModel.deliveryItemViewModels.count
+        deliveryItemListViewModel.loadMore(With: count/10) {
+            if self.deliveryItemListViewModel.deliveryItemViewModels.count >= 10 {
                 promise.fulfill()
             } else {
-                print("------------------\(self.deliveryItemListViewModel.deliveryItemViewModels.count)")
                 XCTFail("Error: Count not as expected")
             }
         }

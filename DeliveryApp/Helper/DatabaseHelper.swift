@@ -21,6 +21,7 @@ class DatabaseHelper {
         try? CoreDataStack.shared.persistentContainer.viewContext.save()
     }
 
+    // Create Delivery Entity
     private func createDeliveryEntityFrom(dictionary: [String: AnyObject]) -> NSManagedObject? {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         if let deliveryEntity = NSEntityDescription.insertNewObject(forEntityName:
@@ -38,6 +39,7 @@ class DatabaseHelper {
         return nil
     }
 
+    // Create Location Entity
     private func createLocationEntityFrom(dictionary: [String: AnyObject]) -> NSManagedObject? {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         if let locationEntity = NSEntityDescription.insertNewObject(forEntityName:
@@ -67,6 +69,7 @@ class DatabaseHelper {
         clearData(entityName: String(describing: Location.self))
     }
 
+    // Clear data for Entity
     private func clearData(entityName: String) {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)

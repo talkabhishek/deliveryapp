@@ -13,6 +13,7 @@ class DeliveryDetailViewController: UIViewController {
     // MARK: - Instance variables
     var deliveryItemViewModel: DeliveryItemViewModel!
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,6 +24,7 @@ class DeliveryDetailViewController: UIViewController {
         setupViews()
     }
 
+    // MARK: Setup view programatically
     private func setupViews() {
         let mapView = MKMapView()
         mapView.delegate = self
@@ -51,6 +53,8 @@ class DeliveryDetailViewController: UIViewController {
         deliveryInfoView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
 }
+
+// MapView Delegate
 extension DeliveryDetailViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "marker"
