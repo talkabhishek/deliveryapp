@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		494D789DD11D3FD2FA853B40 /* Pods_DeliveryApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C70C6BFB9CBB68A4ECEF95 /* Pods_DeliveryApp.framework */; };
+		61D1496D22D48D88001FB759 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61D1496F22D48D88001FB759 /* Localizable.strings */; };
 		61F94B4722D45DB00069E7FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94B4622D45DB00069E7FE /* AppDelegate.swift */; };
 		61F94B4F22D45DB00069E7FE /* DeliveryApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 61F94B4D22D45DB00069E7FE /* DeliveryApp.xcdatamodeld */; };
 		61F94B5122D45DB10069E7FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61F94B5022D45DB10069E7FE /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		14C70C6BFB9CBB68A4ECEF95 /* Pods_DeliveryApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeliveryApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61D1496E22D48D88001FB759 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		61F94B4322D45DB00069E7FE /* DeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61F94B4622D45DB00069E7FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61F94B4E22D45DB00069E7FE /* DeliveryApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DeliveryApp.xcdatamodel; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		61F94B6A22D45DCD0069E7FE /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				61D1496F22D48D88001FB759 /* Localizable.strings */,
 				61F94B5022D45DB10069E7FE /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61F94B5422D45DB10069E7FE /* LaunchScreen.storyboard in Resources */,
+				61D1496D22D48D88001FB759 /* Localizable.strings in Resources */,
 				61F94B5122D45DB10069E7FE /* Assets.xcassets in Resources */,
 				61F94C0C22D467D30069E7FE /* GoogleService-Info.plist in Resources */,
 			);
@@ -459,6 +463,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		61D1496F22D48D88001FB759 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				61D1496E22D48D88001FB759 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		61F94B5222D45DB10069E7FE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
