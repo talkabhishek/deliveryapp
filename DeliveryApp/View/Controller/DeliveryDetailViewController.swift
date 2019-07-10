@@ -36,8 +36,10 @@ class DeliveryDetailViewController: UIViewController {
         mapView.addAnnotation(deliveryItemViewModel)
         self.view.addSubview(mapView)
 
-        let deliveryInfoView = DeliverItemTableViewCell()
-        deliveryInfoView.configureWith(Item: deliveryItemViewModel)
+        ////let deliveryInfoView = DeliveryItemView()
+        //let deliveryInfoView = DeliveryTableViewCell(style: .default, reuseIdentifier: DeliveryTableViewCell.identifier)
+        let deliveryInfoView = DeliveryTableViewCell()
+        deliveryInfoView.deliveryItem = deliveryItemViewModel
         self.view.addSubview(deliveryInfoView)
 
         // Set Constraints
@@ -45,12 +47,15 @@ class DeliveryDetailViewController: UIViewController {
         mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
+
         deliveryInfoView.translatesAutoresizingMaskIntoConstraints = false
-        deliveryInfoView.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
+        //deliveryInfoView.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
         deliveryInfoView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         deliveryInfoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         deliveryInfoView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
-        deliveryInfoView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        deliveryInfoView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+        //deliveryInfoView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
 }
 

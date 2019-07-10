@@ -32,7 +32,9 @@ class DeliveryListViewController: UIViewController {
     func setupViews() {
         // Add table view
         tableView = UITableView()
-        tableView.register(DeliverItemTableViewCell.self, forCellReuseIdentifier: DeliverItemTableViewCell.identifier)
+        tableView.register(DeliveryTableViewCell.self, forCellReuseIdentifier: DeliveryTableViewCell.identifier)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -59,6 +61,28 @@ class DeliveryListViewController: UIViewController {
         self.updateDataSource()
         deliveryListViewModel.refreshList { (error) in
             self.handleResponse(error: error)
+        }
+    }
+
+    func loadMoreItems(numOfRows: Int) {
+        self.tableView.tableFooterView?.isHidden = false
+        deliveryListViewModel.loadMore(With: numOfRows/DeliveriesRequest.limit) { (error) in
+            self.refreshControl.endRefreshing()
+            self.tableView.tableFooterView?.isHidden = true
+            if let error = error {
+                self.showAlert(message: error.message)
+            } else {
+                print("-------------------------:")
+                print(numOfRows, self.deliveryListViewModel.deliveryViewModels.count)
+                self.updateDataSource()
+//                var indexPaths: [IndexPath] = []
+//                for row in numOfRows..<self.deliveryListViewModel.deliveryViewModels.count {
+//                    indexPaths.append(IndexPath(row: row, section: 0))
+//                }
+//                self.tableView.beginUpdates()
+//                self.tableView.insertRows(at: indexPaths, with: .automatic)
+//                self.tableView.endUpdates()
+            }
         }
     }
 
@@ -92,12 +116,12 @@ extension DeliveryListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
-            DeliverItemTableViewCell.identifier, for: indexPath)
-            as? DeliverItemTableViewCell else {
+            DeliveryTableViewCell.identifier, for: indexPath)
+            as? DeliveryTableViewCell else {
                 return UITableViewCell()
         }
         let item = deliveryListViewModel.deliveryViewModels[indexPath.row]
-        cell.configureWith(Item: item)
+        cell.deliveryItem = item
         return cell
     }
 }
@@ -112,28 +136,12 @@ extension DeliveryListViewController: UITableViewDelegate {
             indexPath.section == lastSectionIndex &&
             indexPath.row == lastRowIndex &&
             numOfRows.isMultiple(of: DeliveriesRequest.limit) {
-            self.tableView.tableFooterView?.isHidden = false
-            deliveryListViewModel.loadMore(With: numOfRows/DeliveriesRequest.limit) { (error) in
-                self.refreshControl.endRefreshing()
-                self.tableView.tableFooterView?.isHidden = true
-                if let error = error {
-                    self.showAlert(message: error.message)
-                } else {
-                    //self.updateDataSource()
-                    var indexPaths: [IndexPath] = []
-                    for row in numOfRows..<self.deliveryListViewModel.deliveryViewModels.count {
-                        indexPaths.append(IndexPath(row: row, section: 0))
-                    }
-                    self.tableView.beginUpdates()
-                    self.tableView.insertRows(at: indexPaths, with: .automatic)
-                    self.tableView.endUpdates()
-                }
-            }
+            loadMoreItems(numOfRows: numOfRows)
         }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

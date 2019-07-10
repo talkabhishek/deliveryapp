@@ -10,6 +10,9 @@
 		494D789DD11D3FD2FA853B40 /* Pods_DeliveryApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C70C6BFB9CBB68A4ECEF95 /* Pods_DeliveryApp.framework */; };
 		61A0184D22D523E300403520 /* ErrorResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 61A0184B22D523E200403520 /* ErrorResponse.json */; };
 		61A0184E22D523E300403520 /* SuccessResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 61A0184C22D523E300403520 /* SuccessResponse.json */; };
+		61A0185122D5E3BE00403520 /* DeliveryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A0185022D5E3BE00403520 /* DeliveryItemView.swift */; };
+		61A0185522D5E42E00403520 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A0185422D5E42E00403520 /* DeliveryDetailViewController.swift */; };
+		61A0185722D5E43700403520 /* DeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A0185622D5E43700403520 /* DeliveryTableViewCell.swift */; };
 		61D1496D22D48D88001FB759 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61D1496F22D48D88001FB759 /* Localizable.strings */; };
 		61D1497122D496F3001FB759 /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1497022D496F3001FB759 /* Delivery.swift */; };
 		61D1497322D4978A001FB759 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1497222D4978A001FB759 /* Location.swift */; };
@@ -26,9 +29,7 @@
 		61F94BFA22D465100069E7FE /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BF822D465100069E7FE /* DatabaseHelper.swift */; };
 		61F94BFB22D465100069E7FE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BF922D465100069E7FE /* CoreDataStack.swift */; };
 		61F94BFE22D4663E0069E7FE /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */; };
-		61F94C0422D466570069E7FE /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0122D466570069E7FE /* DeliveryDetailViewController.swift */; };
 		61F94C0522D466570069E7FE /* DeliveryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0222D466570069E7FE /* DeliveryListViewController.swift */; };
-		61F94C0622D466570069E7FE /* DeliverItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0322D466570069E7FE /* DeliverItemTableViewCell.swift */; };
 		61F94C0922D4666F0069E7FE /* DeliveryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0722D4666F0069E7FE /* DeliveryListViewModel.swift */; };
 		61F94C0A22D4666F0069E7FE /* DeliveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0822D4666F0069E7FE /* DeliveryViewModel.swift */; };
 		61F94C0C22D467D30069E7FE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61F94C0B22D467D30069E7FE /* GoogleService-Info.plist */; };
@@ -49,6 +50,9 @@
 		14C70C6BFB9CBB68A4ECEF95 /* Pods_DeliveryApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeliveryApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61A0184B22D523E200403520 /* ErrorResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ErrorResponse.json; sourceTree = "<group>"; };
 		61A0184C22D523E300403520 /* SuccessResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SuccessResponse.json; sourceTree = "<group>"; };
+		61A0185022D5E3BE00403520 /* DeliveryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryItemView.swift; sourceTree = "<group>"; };
+		61A0185422D5E42E00403520 /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
+		61A0185622D5E43700403520 /* DeliveryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewCell.swift; sourceTree = "<group>"; };
 		61D1496E22D48D88001FB759 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		61D1497022D496F3001FB759 /* Delivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delivery.swift; sourceTree = "<group>"; };
 		61D1497222D4978A001FB759 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -69,9 +73,7 @@
 		61F94BF822D465100069E7FE /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		61F94BF922D465100069E7FE /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
-		61F94C0122D466570069E7FE /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		61F94C0222D466570069E7FE /* DeliveryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryListViewController.swift; sourceTree = "<group>"; };
-		61F94C0322D466570069E7FE /* DeliverItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliverItemTableViewCell.swift; sourceTree = "<group>"; };
 		61F94C0722D4666F0069E7FE /* DeliveryListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryListViewModel.swift; sourceTree = "<group>"; };
 		61F94C0822D4666F0069E7FE /* DeliveryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryViewModel.swift; sourceTree = "<group>"; };
 		61F94C0B22D467D30069E7FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -122,6 +124,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		61A0184F22D5D87300403520 /* AppConfig */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppConfig;
+			sourceTree = "<group>";
+		};
 		61F94B3A22D45DB00069E7FE = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +154,7 @@
 		61F94B4522D45DB00069E7FE /* DeliveryApp */ = {
 			isa = PBXGroup;
 			children = (
+				61A0184F22D5D87300403520 /* AppConfig */,
 				61F94B6922D45DC30069E7FE /* Extension */,
 				61F94B6E22D45E320069E7FE /* Helper */,
 				61F94B6B22D45DD90069E7FE /* Model */,
@@ -203,7 +213,8 @@
 			children = (
 				61F94B5222D45DB10069E7FE /* LaunchScreen.storyboard */,
 				61F94C0022D466570069E7FE /* Controller */,
-				61F94C0322D466570069E7FE /* DeliverItemTableViewCell.swift */,
+				61A0185022D5E3BE00403520 /* DeliveryItemView.swift */,
+				61A0185622D5E43700403520 /* DeliveryTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -232,7 +243,7 @@
 		61F94C0022D466570069E7FE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				61F94C0122D466570069E7FE /* DeliveryDetailViewController.swift */,
+				61A0185422D5E42E00403520 /* DeliveryDetailViewController.swift */,
 				61F94C0222D466570069E7FE /* DeliveryListViewController.swift */,
 			);
 			path = Controller;
@@ -450,15 +461,16 @@
 			files = (
 				61F94C0522D466570069E7FE /* DeliveryListViewController.swift in Sources */,
 				61F94B7822D45F000069E7FE /* APIHelper.swift in Sources */,
+				61A0185522D5E42E00403520 /* DeliveryDetailViewController.swift in Sources */,
+				61A0185122D5E3BE00403520 /* DeliveryItemView.swift in Sources */,
 				61F94C0A22D4666F0069E7FE /* DeliveryViewModel.swift in Sources */,
 				61D1497522D499BD001FB759 /* Utilities.swift in Sources */,
 				61D1497922D4B4DE001FB759 /* UIViewControllerExtension.swift in Sources */,
 				61D1497722D4B446001FB759 /* UIAlertControllerExtension.swift in Sources */,
-				61F94C0422D466570069E7FE /* DeliveryDetailViewController.swift in Sources */,
 				61F94BFE22D4663E0069E7FE /* UIImageViewExtension.swift in Sources */,
 				61F94BFA22D465100069E7FE /* DatabaseHelper.swift in Sources */,
+				61A0185722D5E43700403520 /* DeliveryTableViewCell.swift in Sources */,
 				61D1497322D4978A001FB759 /* Location.swift in Sources */,
-				61F94C0622D466570069E7FE /* DeliverItemTableViewCell.swift in Sources */,
 				61F94B4F22D45DB00069E7FE /* DeliveryApp.xcdatamodeld in Sources */,
 				61F94BFB22D465100069E7FE /* CoreDataStack.swift in Sources */,
 				61F94C0922D4666F0069E7FE /* DeliveryListViewModel.swift in Sources */,

@@ -120,4 +120,17 @@ class DeliveryAppTests: XCTestCase {
         wait(for: [promise], timeout: 5)
     }
 
+    func testGetDeliveryError() {
+        deliveryListViewModel.clearList()
+        let promise = expectation(description: "Error Fetching")
+        DatabaseHelper.shared.getDeliveries(page: 0, completion: { (deliveries) in
+            print("111111111111: ", deliveries.count)
+            XCTFail("Should get failed")
+        }, errorCompletion: { (error) in
+            print(error.message)
+            promise.fulfill()
+        })
+        wait(for: [promise], timeout: 5)
+    }
+
 }

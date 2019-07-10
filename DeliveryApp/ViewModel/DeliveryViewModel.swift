@@ -10,14 +10,10 @@ import Foundation
 import MapKit
 
 class DeliveryViewModel: NSObject {
-    let item: Delivery
+    private let item: Delivery
 
     init(item: Delivery) {
         self.item = item
-    }
-
-    var itemId: Int {
-        return Int(item.id)
     }
 
     var imageURL: String {
