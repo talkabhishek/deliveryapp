@@ -8,19 +8,13 @@
 import UIKit
 
 extension UIAlertController {
-    class func getAlert(title: String? = nil, message: String?,
-                        dismissTitle: String? = nil, dismissAction: (() -> Void)? = nil) -> UIAlertController {
+    class func getAlert(title: String? = StaticString.titleText,
+                        message: String?,
+                        dismissTitle: String? = StaticString.dismissText,
+                        dismissAction: (() -> Void)? = nil) -> UIAlertController {
         // create alert controller
-        var titleText = StaticString.titleText
-        var dismissText  = StaticString.dismissText
-        if title != nil {
-            titleText = title ?? ""
-        }
-        if dismissTitle != nil {
-            dismissText = dismissTitle ?? ""
-        }
-        let alertController = UIAlertController(title: titleText, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: dismissText, style: .default, handler: { (_) in
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: dismissTitle, style: .default, handler: { (_) in
             dismissAction?()
         }))
         return alertController

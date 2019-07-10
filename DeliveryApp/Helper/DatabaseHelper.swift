@@ -45,6 +45,17 @@ class DatabaseHelper {
         return nil
     }
 
+    func createDelivery(From item: DeliveryItem?) -> Delivery {
+        return Delivery(id: Int(item?.id ?? 0),
+                        desc: item?.desc ?? "",
+                        imageURL: item?.imageURL ?? "",
+                        location: createLocation(From: item?.locationItem))
+    }
+
+    func createLocation(From item: LocationItem?) -> Location {
+        return Location(lat: item?.lat ?? 0, lng: item?.lng ?? 0, address: item?.address ?? "")
+    }
+
     // Get Delivery Count
     func getDeliveryCount() -> Int {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
@@ -55,14 +66,8 @@ class DatabaseHelper {
         return count ?? 0
     }
 
-    // MARK: - Clear Data
-    func clearAllData() {
-        self.clearData(entityName: String(describing: DeliveryItem.self))
-        self.clearData(entityName: String(describing: LocationItem.self))
-    }
-
-    // Clear data for Entity
-    private func clearData(entityName: String) {
+    // MARK: - Clear Data for Entity
+    func clearData(entityName: String = String(describing: DeliveryItem.self)) {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let objects  = try? context.fetch(fetchRequest) as? [NSManagedObject]
@@ -70,21 +75,21 @@ class DatabaseHelper {
         CoreDataStack.shared.saveContext()
     }
 
-    func getDeliveries(page: Int,
+    func getDeliveries(offset: Int,
                        completion: @escaping(([Delivery]) -> Swift.Void),
                        errorCompletion: @escaping((ErrorResponse) -> Swift.Void)) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.fetchLimit = DeliveriesRequest.limit
-        fetchRequest.fetchOffset = page * DeliveriesRequest.limit
+        fetchRequest.fetchOffset = offset
         let entityDesc = NSEntityDescription.entity(forEntityName: String(describing: DeliveryItem.self), in:
             CoreDataStack.shared.persistentContainer.viewContext)
         fetchRequest.entity = entityDesc
         let fetchedOjects = try? CoreDataStack.shared.persistentContainer.viewContext.fetch(fetchRequest)
         guard let deliveriesItem = fetchedOjects as? [DeliveryItem] else {
-            errorCompletion(ErrorResponse(error: NetworkError.serverError("No Data")))
+            errorCompletion(ErrorResponse(error: NetworkError.serverError(StaticString.noDataText)))
             return
         }
-        var deliveries = deliveriesItem.map { Utilities.shared.createDelivery(From: $0) }
+        var deliveries = deliveriesItem.map { createDelivery(From: $0) }
         deliveries.sort { (item1, item2) -> Bool in
             return item1.id < item2.id
         }

@@ -23,7 +23,7 @@ class DeliveryListViewController: UIViewController {
         navigationItem.title = StaticString.deliveryListView
         setupViews()
         deliveryListViewModel = DeliveryListViewModel()
-        deliveryListViewModel.bindListItems { (error) in
+        deliveryListViewModel.getDeliveries(offset: 0) { (error) in
             self.handleResponse(error: error)
         }
     }
@@ -54,19 +54,29 @@ class DeliveryListViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
 
+    func getNoDataHeader() -> UIView {
+        let infoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 100))
+        infoLabel.text = StaticString.noDataText
+        infoLabel.textAlignment = .center
+        return infoLabel
+    }
+
     // MARK: Helper function
     // Pull to refresh action
     @objc func refreshBody(sender: Any) {
         // Code to refresh table view
         self.updateDataSource()
-        deliveryListViewModel.refreshList { (error) in
+        deliveryListViewModel.clearList()
+        tableView.reloadData()
+        self.tableView.tableHeaderView = nil
+        deliveryListViewModel.getDeliveries(offset: 0) { (error) in
             self.handleResponse(error: error)
         }
     }
 
     func loadMoreItems(numOfRows: Int) {
         self.tableView.tableFooterView?.isHidden = false
-        deliveryListViewModel.loadMore(With: numOfRows/DeliveriesRequest.limit) { (error) in
+        deliveryListViewModel.getDeliveries(offset: numOfRows) { (error) in
             self.refreshControl.endRefreshing()
             self.tableView.tableFooterView?.isHidden = true
             if let error = error {
@@ -93,6 +103,9 @@ class DeliveryListViewController: UIViewController {
             self.showAlert(message: error.message, dismissAction: {
                 self.refreshControl.endRefreshing()
                 self.tableView.tableFooterView?.isHidden = true
+                if self.deliveryListViewModel.deliveryViewModels.count == 0 {
+                    self.tableView.tableHeaderView = self.getNoDataHeader()
+                }
             })
         } else {
             self.refreshControl.endRefreshing()
@@ -103,9 +116,14 @@ class DeliveryListViewController: UIViewController {
 
     // Update tableview data
     private func updateDataSource() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.reloadData()
+        if deliveryListViewModel.deliveryViewModels.count == 0 {
+            self.tableView.tableHeaderView = self.getNoDataHeader()
+        } else {
+            self.tableView.tableHeaderView = nil
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.reloadData()
+        }
     }
 
 }
@@ -134,10 +152,9 @@ extension DeliveryListViewController: UITableViewDelegate {
         let lastSectionIndex = tableView.numberOfSections - 1
         let numOfRows = tableView.numberOfRows(inSection: lastSectionIndex)
         let lastRowIndex = numOfRows - 1
-        if deliveryListViewModel.hasMoreData &&
+        if !deliveryListViewModel.isLoading &&
             indexPath.section == lastSectionIndex &&
-            indexPath.row == lastRowIndex &&
-            numOfRows.isMultiple(of: DeliveriesRequest.limit) {
+            indexPath.row == lastRowIndex {
             loadMoreItems(numOfRows: numOfRows)
         }
     }

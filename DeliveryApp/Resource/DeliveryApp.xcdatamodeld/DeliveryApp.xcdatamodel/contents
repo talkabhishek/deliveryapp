@@ -4,7 +4,7 @@
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="locationItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationItem" inverseName="deliveryItem" inverseEntity="LocationItem" syncable="YES"/>
+        <relationship name="locationItem" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="LocationItem" inverseName="deliveryItem" inverseEntity="LocationItem" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>

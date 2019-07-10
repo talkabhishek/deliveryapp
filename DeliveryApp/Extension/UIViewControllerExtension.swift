@@ -8,8 +8,8 @@
 import UIKit
 
 extension UIViewController {
-    func showAlert(title: String? = nil, message: String?,
-                   dismissTitle: String? = nil, dismissAction: (() -> Void)? = nil) {
+    func showAlert(title: String? = StaticString.titleText, message: String?,
+                   dismissTitle: String? = StaticString.dismissText, dismissAction: (() -> Void)? = nil) {
         // Resign keyboard
         self.view.endEditing(true)
         UIApplication.shared.sendAction(#selector(self.resignFirstResponder), to: nil, from: nil, for: nil)

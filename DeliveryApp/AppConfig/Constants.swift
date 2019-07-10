@@ -22,12 +22,13 @@ struct DeliveriesRequest {
         static let limit = "limit"
         static let offset = "offset"
     }
-    static let limit = 10
+    static let limit = 20
 }
 
 struct StaticString {
     static let deliveryListView = NSLocalizedString("Things to Deliver", comment: "")
     static let delivertDetailView = NSLocalizedString("Delivery Details", comment: "")
     static let titleText = NSLocalizedString("DeliveryApp", comment: "")
-    static let dismissText  = NSLocalizedString("Ok", comment: "")
+    static let dismissText = NSLocalizedString("Ok", comment: "")
+    static let noDataText = NSLocalizedString("No Data Found", comment: "")
 }

@@ -61,21 +61,38 @@ struct APIHelper {
     }
 
     // MARK: - User API's
-    func deliveries(params: [String: Any]?, completion: @escaping(APICallback)) {
-        guard let url = URL(string: baseURL + DeliveriesRequest.path) else { return }
-        sendRequest(url, method: .get, parameters: params, headers: nil, completion: completion)
-    }
-
-    func getDeliveries(page: Int,
+    func getDeliveries(offset: Int,
                        completion: @escaping(([Delivery]) -> Swift.Void),
                        errorCompletion: @escaping((ErrorResponse) -> Swift.Void)) {
         let params: [String: Any] = [DeliveriesRequest.Param.limit: DeliveriesRequest.limit,
-                                         DeliveriesRequest.Param.offset: page * DeliveriesRequest.limit]
+                                         DeliveriesRequest.Param.offset: offset]
         guard let url = URL(string: baseURL + DeliveriesRequest.path) else { return }
         sendRequest(url, method: .get, parameters: params, headers: nil) { (result) in
-            Utilities.shared.parseAPIResponse(result, type: [Delivery].self,
+            self.parseAPIResponse(result, type: [Delivery].self,
                                               completion: completion,
                                               errorCompletion: errorCompletion)
         }
     }
+
+    // MARK: - Helper function
+    func parseAPIResponse<T>(_ response: Result<Any, NetworkError>,
+                             type: T.Type,
+                             completion: @escaping((T) -> Swift.Void),
+                             errorCompletion: @escaping((ErrorResponse) -> Swift.Void))
+        where T: Codable {
+            switch response {
+            case .success(let value):
+                do {
+                    let data = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
+                    let decoder = JSONDecoder()
+                    let resp = try decoder.decode(type, from: data)
+                    completion(resp)
+                } catch let error {
+                    errorCompletion(ErrorResponse(error: error))
+                }
+            case .failure(let newworkError):
+                errorCompletion(ErrorResponse(error: newworkError))
+            }
+    }
+
 }

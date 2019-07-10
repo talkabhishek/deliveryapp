@@ -13,10 +13,10 @@
 		61A0185522D5E42E00403520 /* DeliveryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A0185422D5E42E00403520 /* DeliveryDetailViewController.swift */; };
 		61A0185722D5E43700403520 /* DeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A0185622D5E43700403520 /* DeliveryTableViewCell.swift */; };
 		61A0185922D5F10900403520 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 61A0185822D5F10800403520 /* README.md */; };
+		61A0185B22D5F65B00403520 /* FetchDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A0185A22D5F65B00403520 /* FetchDataHelper.swift */; };
 		61D1496D22D48D88001FB759 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61D1496F22D48D88001FB759 /* Localizable.strings */; };
 		61D1497122D496F3001FB759 /* Delivery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1497022D496F3001FB759 /* Delivery.swift */; };
 		61D1497322D4978A001FB759 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1497222D4978A001FB759 /* Location.swift */; };
-		61D1497522D499BD001FB759 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1497422D499BD001FB759 /* Utilities.swift */; };
 		61D1497722D4B446001FB759 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1497622D4B446001FB759 /* UIAlertControllerExtension.swift */; };
 		61D1497922D4B4DE001FB759 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D1497822D4B4DE001FB759 /* UIViewControllerExtension.swift */; };
 		61F94B4722D45DB00069E7FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94B4622D45DB00069E7FE /* AppDelegate.swift */; };
@@ -53,10 +53,10 @@
 		61A0185422D5E42E00403520 /* DeliveryDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewController.swift; sourceTree = "<group>"; };
 		61A0185622D5E43700403520 /* DeliveryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewCell.swift; sourceTree = "<group>"; };
 		61A0185822D5F10800403520 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		61A0185A22D5F65B00403520 /* FetchDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDataHelper.swift; sourceTree = "<group>"; };
 		61D1496E22D48D88001FB759 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		61D1497022D496F3001FB759 /* Delivery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delivery.swift; sourceTree = "<group>"; };
 		61D1497222D4978A001FB759 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		61D1497422D499BD001FB759 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		61D1497622D4B446001FB759 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		61D1497822D4B4DE001FB759 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		61F94B4322D45DB00069E7FE /* DeliveryApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeliveryApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,7 +235,7 @@
 				61F94B7722D45F000069E7FE /* APIHelper.swift */,
 				61F94BF922D465100069E7FE /* CoreDataStack.swift */,
 				61F94BF822D465100069E7FE /* DatabaseHelper.swift */,
-				61D1497422D499BD001FB759 /* Utilities.swift */,
+				61A0185A22D5F65B00403520 /* FetchDataHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -464,8 +464,8 @@
 				61F94B7822D45F000069E7FE /* APIHelper.swift in Sources */,
 				61A0185522D5E42E00403520 /* DeliveryDetailViewController.swift in Sources */,
 				61F94C0A22D4666F0069E7FE /* DeliveryViewModel.swift in Sources */,
-				61D1497522D499BD001FB759 /* Utilities.swift in Sources */,
 				61D1497922D4B4DE001FB759 /* UIViewControllerExtension.swift in Sources */,
+				61A0185B22D5F65B00403520 /* FetchDataHelper.swift in Sources */,
 				61D1497722D4B446001FB759 /* UIAlertControllerExtension.swift in Sources */,
 				61F94BFE22D4663E0069E7FE /* UIImageViewExtension.swift in Sources */,
 				61F94BFA22D465100069E7FE /* DatabaseHelper.swift in Sources */,
