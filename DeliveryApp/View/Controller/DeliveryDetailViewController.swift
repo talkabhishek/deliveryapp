@@ -37,7 +37,6 @@ class DeliveryDetailViewController: UIViewController {
         self.view.addSubview(mapView)
 
         ////let deliveryInfoView = DeliveryItemView()
-        //let deliveryInfoView = DeliveryTableViewCell(style: .default, reuseIdentifier: DeliveryTableViewCell.identifier)
         let deliveryInfoView = DeliveryTableViewCell()
         deliveryInfoView.deliveryItem = deliveryItemViewModel
         self.view.addSubview(deliveryInfoView)

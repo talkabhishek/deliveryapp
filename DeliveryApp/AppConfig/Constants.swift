@@ -11,9 +11,11 @@ import Foundation
 struct AppURL {
     static let baseURL = "https://mock-api-mobile.dev.lalamove.com"
 }
+
 struct PersistentContainer {
     static let name = "DeliveryApp"
 }
+
 struct DeliveriesRequest {
     static let path = "/deliveries"
     struct Param {
@@ -22,22 +24,10 @@ struct DeliveriesRequest {
     }
     static let limit = 10
 }
+
 struct StaticString {
     static let deliveryListView = NSLocalizedString("Things to Deliver", comment: "")
     static let delivertDetailView = NSLocalizedString("Delivery Details", comment: "")
     static let titleText = NSLocalizedString("DeliveryApp", comment: "")
     static let dismissText  = NSLocalizedString("Ok", comment: "")
-}
-struct Key {
-    struct DeliveryItem {
-        static let id = "id"
-        static let description = "description"
-        static let imageUrl = "imageUrl"
-        static let location = "location"
-    }
-    struct Location {
-        static let address = "address"
-        static let lat = "lat"
-        static let lng = "lng"
-    }
 }

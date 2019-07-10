@@ -1,15 +1,17 @@
 ## LalaMoveChallenge (mobile)
 A project which list deliveries of goods and their delivery details with map location. 
 
-# Installation
-To run the project :
-- Goto Project Root folder
-- Open xcworkspace 
-
 # Requirement & Support
 Xcode : 10.2.1
 Swift 5
+Cocoapods setup on system
 iOS (10.x, 11.x, 12.x)
+
+# Installation
+To run the project :
+- Goto Project Root folder
+- pod install
+- Open xcworkspace 
 
 # Design  Pattern
 ## MVVM

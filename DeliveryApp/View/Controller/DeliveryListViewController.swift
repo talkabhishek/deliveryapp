@@ -72,16 +72,18 @@ class DeliveryListViewController: UIViewController {
             if let error = error {
                 self.showAlert(message: error.message)
             } else {
-                print("-------------------------:")
-                print(numOfRows, self.deliveryListViewModel.deliveryViewModels.count)
-                self.updateDataSource()
-//                var indexPaths: [IndexPath] = []
-//                for row in numOfRows..<self.deliveryListViewModel.deliveryViewModels.count {
-//                    indexPaths.append(IndexPath(row: row, section: 0))
-//                }
-//                self.tableView.beginUpdates()
-//                self.tableView.insertRows(at: indexPaths, with: .automatic)
-//                self.tableView.endUpdates()
+                DispatchQueue.main.async {
+                    print("-------------------------:")
+                    print(numOfRows, self.deliveryListViewModel.deliveryViewModels.count)
+                    //                self.updateDataSource()
+                    var indexPaths: [IndexPath] = []
+                    for row in numOfRows..<self.deliveryListViewModel.deliveryViewModels.count {
+                        indexPaths.append(IndexPath(row: row, section: 0))
+                    }
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: indexPaths, with: .automatic)
+                    self.tableView.endUpdates()
+                }
             }
         }
     }
