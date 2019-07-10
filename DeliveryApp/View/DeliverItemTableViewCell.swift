@@ -24,9 +24,9 @@ class DeliverItemTableViewCell: UITableViewCell {
         self.layoutMargins = UIEdgeInsets.zero
     }
 
-    func configureWith(Item item: DeliveryItemViewModel) {
+    func configureWith(Item item: DeliveryViewModel) {
         self.imageView?.setImageWith(URL: item.imageURL)
-        self.textLabel?.text = "\(item.description)"
+        self.textLabel?.text = "\(item.itemId): \(item.description)"
     }
 
 }

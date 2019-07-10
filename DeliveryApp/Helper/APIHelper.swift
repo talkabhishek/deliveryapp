@@ -13,6 +13,22 @@ public enum NetworkError: Error {
     case serverError(String)
 }
 
+struct ErrorResponse {
+    var message: String
+
+    init(error: Error) {
+        message = error.localizedDescription
+    }
+
+    init(error: NetworkError) {
+        message = error.localizedDescription
+        switch error {
+        case .serverError(let errorMessage):
+            message = errorMessage
+        }
+    }
+}
+
 //typealias JSONDictionary = [String: Any]
 typealias APICallback = (Result<Any, NetworkError>) -> Swift.Void
 
@@ -48,5 +64,18 @@ struct APIHelper {
     func deliveries(params: [String: Any]?, completion: @escaping(APICallback)) {
         guard let url = URL(string: baseURL + DeliveriesRequest.path) else { return }
         sendRequest(url, method: .get, parameters: params, headers: nil, completion: completion)
+    }
+
+    func getDeliveries(page: Int,
+                       completion: @escaping(([Delivery]) -> Swift.Void),
+                       errorCompletion: @escaping((ErrorResponse) -> Swift.Void)) {
+        let params: [String: Any] = [DeliveriesRequest.Param.limit: DeliveriesRequest.limit,
+                                         DeliveriesRequest.Param.offset: page * DeliveriesRequest.limit]
+        guard let url = URL(string: baseURL + DeliveriesRequest.path) else { return }
+        sendRequest(url, method: .get, parameters: params, headers: nil) { (result) in
+            Utilities.shared.parseAPIResponse(result, type: [Delivery].self,
+                                              completion: completion,
+                                              errorCompletion: errorCompletion)
+        }
     }
 }

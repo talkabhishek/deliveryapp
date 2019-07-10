@@ -15,58 +15,50 @@ class DatabaseHelper {
     private init() {}
 
     // MARK: - Save list to Core Data
-    func saveInCoreDataWith(array: [[String: AnyObject]]?) {
-        guard let array = array else { return }
-        _ = array.map { self.createDeliveryEntityFrom(dictionary: $0) }
+    func saveInCoreData(array: [Delivery]) {
+        _ = array.map { self.createDeliveryItem(From: $0) }
         try? CoreDataStack.shared.persistentContainer.viewContext.save()
     }
 
-    // Create Delivery Entity
-    private func createDeliveryEntityFrom(dictionary: [String: AnyObject]) -> NSManagedObject? {
+    func createDeliveryItem(From item: Delivery?) -> DeliveryItem? {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         if let deliveryEntity = NSEntityDescription.insertNewObject(forEntityName:
             String(describing: DeliveryItem.self), into: context) as? DeliveryItem {
-            deliveryEntity.id = dictionary[Key.DeliveryItem.id] as? Int32 ?? 0
-            deliveryEntity.desc = dictionary[Key.DeliveryItem.description] as? String
-            deliveryEntity.imageURL = dictionary[Key.DeliveryItem.imageUrl] as? String
-            if let locationJson = dictionary[Key.DeliveryItem.location] as? [String: AnyObject],
-                let locationItem = createLocationEntityFrom(dictionary: locationJson) as? Location {
-                locationItem.deliveryItem = deliveryEntity
-                deliveryEntity.location = locationItem
-            }
-            return deliveryEntity
+            deliveryEntity.id = Int32(item?.id ?? 0)
+            deliveryEntity.desc = item?.desc
+            deliveryEntity.imageURL = item?.imageURL
+            deliveryEntity.locationItem = createLocationItem(From: item?.location)
         }
         return nil
     }
 
-    // Create Location Entity
-    private func createLocationEntityFrom(dictionary: [String: AnyObject]) -> NSManagedObject? {
+    func createLocationItem(From item: Location?) -> LocationItem? {
         let context = CoreDataStack.shared.persistentContainer.viewContext
         if let locationEntity = NSEntityDescription.insertNewObject(forEntityName:
-            String(describing: Location.self), into: context) as? Location {
-            locationEntity.lat = dictionary[Key.Location.lat] as? Double ?? 0
-            locationEntity.lng = dictionary[Key.Location.lng] as? Double ?? 0
-            locationEntity.address = dictionary[Key.Location.address] as? String
+            String(describing: LocationItem.self), into: context) as? LocationItem {
+            locationEntity.lat = item?.lat ?? 0
+            locationEntity.lng = item?.lng ?? 0
+            locationEntity.address = item?.address
             locationEntity.deliveryItem = nil
             return locationEntity
         }
         return nil
     }
 
-    // MARK: - Fetch Controller
-    lazy var fetchedhResultController: NSFetchedResultsController<NSFetchRequestResult> = {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: String(describing: DeliveryItem.self))
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: Key.DeliveryItem.id, ascending: true)]
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                             managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext,
-                                             sectionNameKeyPath: nil, cacheName: nil)
-        return frc
-    }()
+    // Get Delivery Count
+    func getDeliveryCount() -> Int {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+        let entityDesc = NSEntityDescription.entity(forEntityName: String(describing: DeliveryItem.self), in:
+            CoreDataStack.shared.persistentContainer.viewContext)
+        fetchRequest.entity = entityDesc
+        let count = try? CoreDataStack.shared.persistentContainer.viewContext.count(for: fetchRequest)
+        return count ?? 0
+    }
 
     // MARK: - Clear Data
     func clearAllData() {
         clearData(entityName: String(describing: DeliveryItem.self))
-        clearData(entityName: String(describing: Location.self))
+        clearData(entityName: String(describing: LocationItem.self))
     }
 
     // Clear data for Entity
@@ -76,5 +68,26 @@ class DatabaseHelper {
         let objects  = try? context.fetch(fetchRequest) as? [NSManagedObject]
         _ = objects.map { $0.map { context.delete($0) } }
         CoreDataStack.shared.saveContext()
+    }
+
+    func getDeliveries(page: Int,
+                       completion: @escaping(([Delivery]) -> Swift.Void),
+                       errorCompletion: @escaping((ErrorResponse) -> Swift.Void)) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
+        fetchRequest.fetchLimit = DeliveriesRequest.limit
+        fetchRequest.fetchOffset = page * DeliveriesRequest.limit
+        let entityDesc = NSEntityDescription.entity(forEntityName: String(describing: DeliveryItem.self), in:
+            CoreDataStack.shared.persistentContainer.viewContext)
+        fetchRequest.entity = entityDesc
+        let fetchedOjects = try? CoreDataStack.shared.persistentContainer.viewContext.fetch(fetchRequest)
+        guard let deliveriesItem = fetchedOjects as? [DeliveryItem] else {
+            errorCompletion(ErrorResponse(error: NetworkError.serverError("No Data")))
+            return
+        }
+        var deliveries = deliveriesItem.map { Utilities.shared.createDelivery(From: $0) }
+        deliveries.sort { (item1, item2) -> Bool in
+            return item1.id < item2.id
+        }
+        completion(deliveries)
     }
 }

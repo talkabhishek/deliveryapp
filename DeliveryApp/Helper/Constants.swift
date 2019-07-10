@@ -20,6 +20,7 @@ struct DeliveriesRequest {
         static let limit = "limit"
         static let offset = "offset"
     }
+    static let limit = 10
 }
 struct StaticString {
     static let deliveryListView = NSLocalizedString("Things to Deliver", comment: "")

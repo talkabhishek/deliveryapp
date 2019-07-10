@@ -11,15 +11,15 @@ import XCTest
 
 class DeliveryAppTests: XCTestCase {
 
-    var deliveryItemListViewModel: DeliveryItemListViewModel!
+    var deliveryListViewModel: DeliveryListViewModel!
 
     override func setUp() {
         super.setUp()
-        deliveryItemListViewModel = DeliveryItemListViewModel()
+        deliveryListViewModel = DeliveryListViewModel()
     }
 
     override func tearDown() {
-        deliveryItemListViewModel = nil
+        deliveryListViewModel = nil
         super.tearDown()
     }
 
@@ -43,37 +43,39 @@ class DeliveryAppTests: XCTestCase {
     }
 
     func testClearData() {
-        deliveryItemListViewModel.clearList()
-        let count = deliveryItemListViewModel.deliveryItemViewModels.count
+        deliveryListViewModel.clearList()
+        let count = deliveryListViewModel.deliveryViewModels.count
         XCTAssertEqual(count, 0, "Delivery count should be zero")
     }
 
     func testSaveData() {
-        let count1 = deliveryItemListViewModel.deliveryItemViewModels.count
-
+        deliveryListViewModel.clearList()
         let testBundle = Bundle(for: type(of: self))
-        let path = testBundle.path(forResource: "response", ofType: "json")
+        let path = testBundle.path(forResource: "SuccessResponse", ofType: "json")
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path!), options: .alwaysMapped)
-            let jsonResponse = try JSONSerialization.jsonObject(with: data,
-                                                                options:
-                JSONSerialization.ReadingOptions.allowFragments)
-            if let list = jsonResponse as? [[String: AnyObject]] {
-                DatabaseHelper.shared.saveInCoreDataWith(array: list)
-            }
-        } catch { }
-        let count2 = deliveryItemListViewModel.deliveryItemViewModels.count
-        XCTAssertEqual(count1 + 10, count2, "Delivery count should increment by 10")
+            let deliveries = try Utilities.shared.decode([Delivery].self, from: data)
+            DatabaseHelper.shared.saveInCoreData(array: deliveries)
+        } catch let error {
+            XCTFail(error.localizedDescription)
+        }
+        DispatchQueue.global().asyncAfter(deadline: .now()+1.0) {
+            let count = self.deliveryListViewModel.deliveryViewModels.count
+            XCTAssertEqual(10, count, "Delivery count should be 10")
+        }
     }
 
     func testRefershList() {
         let promise = expectation(description: "Response count is 10 after refresh")
-        deliveryItemListViewModel.refreshList {
-            if self.deliveryItemListViewModel.deliveryItemViewModels.count == 10 {
-                promise.fulfill()
+        deliveryListViewModel.refreshList { (error) in
+            if let error = error {
+                XCTFail(error.message)
             } else {
-                print("------------------\(self.deliveryItemListViewModel.deliveryItemViewModels.count)")
-                XCTFail("Error: Count not equal")
+                if self.deliveryListViewModel.deliveryViewModels.count == 10 {
+                    promise.fulfill()
+                } else {
+                    XCTFail("Error: Count not equal")
+                }
             }
         }
         wait(for: [promise], timeout: 25)
@@ -81,15 +83,41 @@ class DeliveryAppTests: XCTestCase {
 
     func testLoadMoreData() {
         let promise = expectation(description: "Response should increase by 10")
-        let count = deliveryItemListViewModel.deliveryItemViewModels.count
-        deliveryItemListViewModel.loadMore(With: count/10) {
-            if self.deliveryItemListViewModel.deliveryItemViewModels.count >= 10 {
-                promise.fulfill()
+        let count = deliveryListViewModel.deliveryViewModels.count
+        deliveryListViewModel.loadMore(With: count/10) { (error) in
+            if let error = error {
+                XCTFail(error.message)
             } else {
-                XCTFail("Error: Count not as expected")
+                if self.deliveryListViewModel.deliveryViewModels.count >= 10 {
+                    promise.fulfill()
+                } else {
+                    XCTFail("Error: Count not as expected")
+                }
             }
         }
         wait(for: [promise], timeout: 30)
+    }
+
+    func testFailedApi() {
+        let promise = expectation(description: "Failed API")
+        let result: Result<Any, NetworkError> = .failure(NetworkError.serverError("Internal Server Error"))
+        Utilities.shared.parseAPIResponse(result, type: [Delivery].self, completion: { (_) in
+            XCTFail("Should get failed")
+        }, errorCompletion: { (_) in
+            promise.fulfill()
+        })
+        wait(for: [promise], timeout: 5)
+    }
+
+    func testFailedParshingData() {
+        let promise = expectation(description: "Failed Parsing")
+        let result: Result<Any, NetworkError> = .success(["response": "value"])
+        Utilities.shared.parseAPIResponse(result, type: [Delivery].self, completion: { (_) in
+            XCTFail("Should get failed")
+        }, errorCompletion: { (_) in
+            promise.fulfill()
+        })
+        wait(for: [promise], timeout: 5)
     }
 
 }

@@ -11,7 +11,7 @@ import MapKit
 
 class DeliveryDetailViewController: UIViewController {
     // MARK: - Instance variables
-    var deliveryItemViewModel: DeliveryItemViewModel!
+    var deliveryItemViewModel: DeliveryViewModel!
 
     // MARK: - Lifecycle
     override func viewDidLoad() {

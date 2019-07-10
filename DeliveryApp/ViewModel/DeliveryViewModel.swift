@@ -1,5 +1,5 @@
 //
-//  DeliveryItemViewModel.swift
+//  DeliveryViewModel.swift
 //  DeliveryApp
 //
 //  Created by abhisheksingh03 on 08/07/19.
@@ -9,10 +9,10 @@
 import Foundation
 import MapKit
 
-class DeliveryItemViewModel: NSObject {
-    let item: DeliveryItem
+class DeliveryViewModel: NSObject {
+    let item: Delivery
 
-    init(item: DeliveryItem) {
+    init(item: Delivery) {
         self.item = item
     }
 
@@ -20,16 +20,16 @@ class DeliveryItemViewModel: NSObject {
         return Int(item.id)
     }
 
-    var imageURL: String? {
+    var imageURL: String {
         return item.imageURL
     }
 
     override var description: String {
-        return item.desc ?? super.description
+        return item.desc
     }
 }
 // Confirm MKAnnotation for Map
-extension DeliveryItemViewModel: MKAnnotation {
+extension DeliveryViewModel: MKAnnotation {
     public var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: item.location?.lat ?? 0, longitude: item.location?.lng ?? 0)
     }

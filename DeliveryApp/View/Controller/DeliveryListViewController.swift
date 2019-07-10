@@ -13,7 +13,7 @@ class DeliveryListViewController: UIViewController {
     // MARK: - Instance variables
     private var tableView: UITableView!
     var refreshControl = UIRefreshControl()
-    var deliveryItemListViewModel: DeliveryItemListViewModel!
+    var deliveryListViewModel: DeliveryListViewModel!
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -21,13 +21,10 @@ class DeliveryListViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         navigationItem.title = StaticString.deliveryListView
-
         setupViews()
-
-        deliveryItemListViewModel = DeliveryItemListViewModel()
-        deliveryItemListViewModel.bindListItems {
-            self.tableView.tableFooterView?.isHidden = true
-            self.updateDataSource()
+        deliveryListViewModel = DeliveryListViewModel()
+        deliveryListViewModel.bindListItems { (error) in
+            self.handleResponse(error: error)
         }
     }
 
@@ -60,7 +57,18 @@ class DeliveryListViewController: UIViewController {
     @objc func refreshBody(sender: Any) {
         // Code to refresh table view
         self.updateDataSource()
-        deliveryItemListViewModel.refreshList {
+        deliveryListViewModel.refreshList { (error) in
+            self.handleResponse(error: error)
+        }
+    }
+
+    func handleResponse(error: ErrorResponse?) {
+        if let error = error {
+            self.showAlert(message: error.message, dismissAction: {
+                self.refreshControl.endRefreshing()
+                self.tableView.tableFooterView?.isHidden = true
+            })
+        } else {
             self.refreshControl.endRefreshing()
             self.tableView.tableFooterView?.isHidden = true
             self.updateDataSource()
@@ -79,7 +87,7 @@ class DeliveryListViewController: UIViewController {
 // Table view DataSource function
 extension DeliveryListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return deliveryItemListViewModel.deliveryItemViewModels.count
+        return deliveryListViewModel.deliveryViewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,7 +96,7 @@ extension DeliveryListViewController: UITableViewDataSource {
             as? DeliverItemTableViewCell else {
                 return UITableViewCell()
         }
-        let item = deliveryItemListViewModel.deliveryItemViewModels[indexPath.row]
+        let item = deliveryListViewModel.deliveryViewModels[indexPath.row]
         cell.configureWith(Item: item)
         return cell
     }
@@ -100,14 +108,26 @@ extension DeliveryListViewController: UITableViewDelegate {
         let lastSectionIndex = tableView.numberOfSections - 1
         let numOfRows = tableView.numberOfRows(inSection: lastSectionIndex)
         let lastRowIndex = numOfRows - 1
-        if deliveryItemListViewModel.hasMoreData &&
+        if deliveryListViewModel.hasMoreData &&
             indexPath.section == lastSectionIndex &&
             indexPath.row == lastRowIndex &&
-            numOfRows.isMultiple(of: 10) {
+            numOfRows.isMultiple(of: DeliveriesRequest.limit) {
             self.tableView.tableFooterView?.isHidden = false
-            deliveryItemListViewModel.loadMore(With: numOfRows/10) {
+            deliveryListViewModel.loadMore(With: numOfRows/DeliveriesRequest.limit) { (error) in
+                self.refreshControl.endRefreshing()
                 self.tableView.tableFooterView?.isHidden = true
-                self.updateDataSource()
+                if let error = error {
+                    self.showAlert(message: error.message)
+                } else {
+                    //self.updateDataSource()
+                    var indexPaths: [IndexPath] = []
+                    for row in numOfRows..<self.deliveryListViewModel.deliveryViewModels.count {
+                        indexPaths.append(IndexPath(row: row, section: 0))
+                    }
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: indexPaths, with: .automatic)
+                    self.tableView.endUpdates()
+                }
             }
         }
     }
@@ -118,7 +138,7 @@ extension DeliveryListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let item = deliveryItemListViewModel.deliveryItemViewModels[indexPath.row]
+        let item = deliveryListViewModel.deliveryViewModels[indexPath.row]
         let deliveryDetail = DeliveryDetailViewController()
         deliveryDetail.deliveryItemViewModel = item
         self.navigationController?.show(deliveryDetail, sender: true)
