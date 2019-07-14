@@ -17,12 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions
         launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let deliveriesViewController = DeliveryListViewController()
-        let navigationController = UINavigationController(rootViewController: deliveriesViewController)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
-        FirebaseApp.configure()
+        setUpApplication()
         return true
     }
 
@@ -46,6 +41,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate.
         // Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        CoreDataStack.shared.saveContext()
+        CoreDataManager.shared.saveContext()
+    }
+}
+extension AppDelegate {
+    private func setUpApplication() {
+        setUpRootViewController()
+        FirebaseApp.configure()
+    }
+
+    private func setUpRootViewController() {
+        let deliveriesViewController = DeliveryListViewController()
+        let navigationController = AppNavigationController(rootViewController: deliveriesViewController)
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 }

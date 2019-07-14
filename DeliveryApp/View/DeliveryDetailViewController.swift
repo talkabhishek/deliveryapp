@@ -2,7 +2,7 @@
 //  DeliveryDetailViewController.swift
 //  DeliveryApp
 //
-//  Created by abhisheksingh03 on 07/07/19.
+//  Created by abhisheksingh03 on 10/07/19.
 //  Copyright © 2019 abhisheksingh03. All rights reserved.
 //
 
@@ -18,7 +18,7 @@ class DeliveryDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.title = StaticString.delivertDetailView
+        navigationItem.title = StringConstant.delivertDetailView
         self.view.backgroundColor = UIColor.white
 
         setupViews()
@@ -34,27 +34,24 @@ class DeliveryDetailViewController: UIViewController {
                                                   longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
         mapView.addAnnotation(deliveryItemViewModel)
-        self.view.addSubview(mapView)
+        view.addSubview(mapView)
+        mapView.fillSuperview()
 
-        ////let deliveryInfoView = DeliveryItemView()
-        let deliveryInfoView = DeliveryTableViewCell()
+        let deliveryInfoView = DeliveryItemView()
         deliveryInfoView.deliveryItem = deliveryItemViewModel
-        self.view.addSubview(deliveryInfoView)
+        view.addSubview(deliveryInfoView)
+        deliveryInfoView.anchor(top: nil,
+                                left: view.leftAnchor,
+                                bottom: view.bottomAnchor,
+                                right: view.rightAnchor,
+                                topConstant: 0,
+                                leftConstant: 15,
+                                bottomConstant: 50,
+                                rightConstant: 15,
+                                widthConstant: 0,
+                                heightConstant: 0)
 
-        // Set Constraints
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        mapView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        mapView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
-
-        deliveryInfoView.translatesAutoresizingMaskIntoConstraints = false
-        //deliveryInfoView.topAnchor.constraint(equalTo: mapView.bottomAnchor).isActive = true
-        deliveryInfoView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        deliveryInfoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        deliveryInfoView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
-        deliveryInfoView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
-        //deliveryInfoView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        deliveryInfoView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
     }
 }
 

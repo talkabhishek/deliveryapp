@@ -19,8 +19,8 @@ class DeliveryItemView: UIView {
 
     private let deliveryItemLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = ColorConstant.cellText
+        label.font = FontConstant.systemRegular
         label.textAlignment = .left
         label.numberOfLines = 0
         return label
@@ -30,12 +30,16 @@ class DeliveryItemView: UIView {
         let imgView = UIImageView(image: UIImage(named: "placeholder"))
         imgView.contentMode = .scaleAspectFill
         imgView.clipsToBounds = true
+        imgView.layer.cornerRadius = 5
         return imgView
     }()
 
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        super.init(frame: CGRect.zero)
         self.backgroundColor = .white
+        self.layer.cornerRadius = 5
+        self.layer.borderColor = ColorConstant.appTheme.cgColor
+        self.layer.borderWidth = 0.5
         self.addSubview(deliveryItemImage)
         self.addSubview(deliveryItemLabel)
         setupViewConstraints()
@@ -47,19 +51,29 @@ class DeliveryItemView: UIView {
 
     func setupViewConstraints() {
         let marginGuide = self.layoutMarginsGuide
-        deliveryItemImage.translatesAutoresizingMaskIntoConstraints = false
-        deliveryItemImage.leadingAnchor.constraint(equalTo: marginGuide.leadingAnchor, constant: 0).isActive = true
-        deliveryItemImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        deliveryItemImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        deliveryItemImage.topAnchor.constraint(equalTo: marginGuide.topAnchor, constant: 5).isActive = true
+        deliveryItemImage.anchor(top: marginGuide.topAnchor,
+                                 left: marginGuide.leftAnchor,
+                                 bottom: nil,
+                                 right: nil,
+                                 topConstant: 5,
+                                 leftConstant: 5,
+                                 bottomConstant: 0,
+                                 rightConstant: 0,
+                                 widthConstant: 70,
+                                 heightConstant: 70)
 
-        deliveryItemLabel.translatesAutoresizingMaskIntoConstraints = false
-        deliveryItemLabel.leadingAnchor.constraint(
-            equalTo: deliveryItemImage.trailingAnchor, constant: 20).isActive = true
-        deliveryItemLabel.topAnchor.constraint(equalTo: marginGuide.topAnchor, constant: 5).isActive = true
-        deliveryItemLabel.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor).isActive = true
-        deliveryItemLabel.bottomAnchor.constraint(equalTo: marginGuide.bottomAnchor, constant: -5).isActive = true
-        deliveryItemLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+        deliveryItemLabel.anchor(top: marginGuide.topAnchor,
+                                 left: deliveryItemImage.rightAnchor,
+                                 bottom: marginGuide.bottomAnchor,
+                                 right: marginGuide.rightAnchor,
+                                 topConstant: 0,
+                                 leftConstant: 20,
+                                 bottomConstant: 0,
+                                 rightConstant: 0,
+                                 widthConstant: 0,
+                                 heightConstant: 0)
+
+        deliveryItemLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
     }
 
 }

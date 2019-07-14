@@ -24,8 +24,8 @@ class DeliveryAppTests: XCTestCase {
     }
 
 //    func testDeliveriesResponseCount() {
-//        let params: [String: Any] = [DeliveriesRequest.Param.limit: 10,
-//                                     DeliveriesRequest.Param.offset: 0]
+//        let params: [String: Any] = [Pagination.Param.limit: 10,
+//                                     Pagination.Param.offset: 0]
 //        let promise = expectation(description: "Response count is limit")
 //        APIHelper.shared.deliveries(params: params) { (result) in
 //            switch result {

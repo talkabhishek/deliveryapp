@@ -2,7 +2,7 @@
 //  DeliveryListViewModel.swift
 //  DeliveryApp
 //
-//  Created by abhisheksingh03 on 08/07/19.
+//  Created by abhisheksingh03 on 10/07/19.
 //  Copyright © 2019 abhisheksingh03. All rights reserved.
 //
 
@@ -12,43 +12,54 @@ import CoreData
 class DeliveryListViewModel: NSObject {
 
     // MARK: - Instance variables
-    private(set) var deliveryViewModels: [DeliveryViewModel] = [DeliveryViewModel]()
-    var isLoading = false
+    @objc dynamic var deliveryViewModels = [DeliveryViewModel]()
+    @objc dynamic var error: Error?
+
+    private(set) var coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared
+    private(set) var apiServiceManager: APIServiceManagerProtocol = APIServiceManager.shared
 
     override init() {
         super.init()
     }
 
     // Get data action
-    func getDeliveries(offset: Int, completion: @escaping((ErrorResponse?) -> Swift.Void)) {
-        if isLoading {
-            completion(nil)
+    func getDeliveries(offset: Int = 0, refresh: Bool = false) {
+        if coreDataManager.getDeliveryCount() > offset && !refresh {
+            let deliveries = coreDataManager.getDeliveryList(offset:
+                offset, limit: Pagination.limit)
+            setListValues(deliveries: deliveries)
         } else {
-            isLoading = true
-            FetchDataHelper.shared.getDeliveries(offset: offset, completion: { (deliveries) in
-                self.setListValues(deliveries: deliveries)
-                self.isLoading = false
-                completion(nil)
-            }, errorCompletion: { (error) in
-                self.isLoading = false
-                completion(error)
-            })
+            apiServiceManager.getDeliveryList(offset: offset, limit: Pagination.limit) { (response) in
+                switch response {
+                case .success(let value):
+                    self.setListValues(deliveries: value, refresh: refresh)
+                    self.coreDataManager.saveInCoreData(array: value)
+                case .failure(let error):
+                    self.error = error
+                }
+            }
         }
     }
 
     // Clear data action
     func clearList() {
-        DatabaseHelper.shared.clearData()
+        coreDataManager.clearData()
         deliveryViewModels = []
     }
 
+    // Save data action
     func saveData(deliveries: [Delivery]) {
-        DatabaseHelper.shared.saveInCoreData(array: deliveries)
+        coreDataManager.saveInCoreData(array: deliveries)
     }
 
-    // fetch data from Database
-    func setListValues(deliveries: [Delivery]) {
+    // Set view model
+    func setListValues(deliveries: [Delivery], refresh: Bool = false) {
         let dvm = deliveries.map {DeliveryViewModel(item: $0) }
-        deliveryViewModels += dvm
+        if refresh {
+            coreDataManager.clearData()
+            deliveryViewModels = dvm
+        } else {
+            deliveryViewModels += dvm
+        }
     }
 }

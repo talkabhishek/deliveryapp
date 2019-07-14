@@ -2,7 +2,7 @@
 //  DeliveryViewModel.swift
 //  DeliveryApp
 //
-//  Created by abhisheksingh03 on 08/07/19.
+//  Created by abhisheksingh03 on 10/07/19.
 //  Copyright © 2019 abhisheksingh03. All rights reserved.
 //
 
@@ -18,6 +18,10 @@ class DeliveryViewModel: NSObject {
 
     var imageURL: String {
         return item.imageURL
+    }
+
+    var itemId: String {
+        return "\(item.id) "
     }
 
     override var description: String {
