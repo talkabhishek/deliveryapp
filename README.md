@@ -61,5 +61,5 @@ To run the project :
 - UITesting
 
 # Screenshots
-![list](https://user-images.githubusercontent.com/26160090/60810534-ffd25f00-a1aa-11e9-8d1c-e76e612ebc03.png)
-![location](https://user-images.githubusercontent.com/26160090/60810553-04971300-a1ab-11e9-886b-07c09d18980a.png)
+![Simulator Screen Shot - iPhone Xʀ - 2019-07-14 at 12 41 10](https://user-images.githubusercontent.com/26160090/61180492-b5326600-a634-11e9-9cc5-a1c1d92ad153.png)
+![Simulator Screen Shot - iPhone Xʀ - 2019-07-14 at 12 41 17](https://user-images.githubusercontent.com/26160090/61180494-b82d5680-a634-11e9-9d57-c55e39ca17a2.png)
