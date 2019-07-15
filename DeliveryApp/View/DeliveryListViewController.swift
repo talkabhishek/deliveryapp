@@ -131,6 +131,10 @@ class DeliveryListViewController: UIViewController {
         }
     }
 
+    deinit {
+        _ = observers.map({$0.invalidate()})
+    }
+
 }
 
 // Table view DataSource function

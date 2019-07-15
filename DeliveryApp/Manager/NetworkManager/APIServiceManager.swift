@@ -16,10 +16,6 @@ protocol APIServiceManagerProtocol {
 }
 
 class APIServiceManager: APIServiceManagerProtocol {
-
-    static let shared = APIServiceManager()
-    private init() {}
-
     // MARK: - Root Methods
     private func sendWebRequest<T: Decodable>(
         service: APIService,

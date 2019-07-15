@@ -15,8 +15,8 @@ class DeliveryListViewModel: NSObject {
     @objc dynamic var deliveryViewModels = [DeliveryViewModel]()
     @objc dynamic var error: Error?
 
-    private(set) var coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared
-    private(set) var apiServiceManager: APIServiceManagerProtocol = APIServiceManager.shared
+    private(set) var coreDataManager: CoreDataManagerProtocol = CoreDataManager()
+    private(set) var apiServiceManager: APIServiceManagerProtocol = APIServiceManager()
 
     override init() {
         super.init()

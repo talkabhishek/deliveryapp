@@ -11,7 +11,7 @@
 		61625A7A22D9B48C0030658B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A7922D9B48C0030658B /* APIService.swift */; };
 		61625A7E22D9BAC30030658B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A7D22D9BAC30030658B /* Configuration.swift */; };
 		61625A8022D9BFCF0030658B /* APIServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A7F22D9BFCF0030658B /* APIServiceManager.swift */; };
-		61625A8422D9EFF30030658B /* CoreDataManagerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A8322D9EFF30030658B /* CoreDataManagerExtension.swift */; };
+		61625A8422D9EFF30030658B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A8322D9EFF30030658B /* CoreDataManager.swift */; };
 		61625A9122DA35520030658B /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A9022DA35520030658B /* UIViewExtension.swift */; };
 		61625A9522DA4A7C0030658B /* DeliveryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A9422DA4A7C0030658B /* DeliveryItemView.swift */; };
 		61625A9722DAFDFE0030658B /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A9622DAFDFE0030658B /* AppNavigationController.swift */; };
@@ -31,7 +31,7 @@
 		61F94B5422D45DB10069E7FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61F94B5222D45DB10069E7FE /* LaunchScreen.storyboard */; };
 		61F94B5F22D45DB10069E7FE /* DeliveryAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94B5E22D45DB10069E7FE /* DeliveryAppTests.swift */; };
 		61F94B7322D45E440069E7FE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94B6F22D45E440069E7FE /* Constant.swift */; };
-		61F94BFB22D465100069E7FE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BF922D465100069E7FE /* CoreDataManager.swift */; };
+		61F94BFB22D465100069E7FE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BF922D465100069E7FE /* CoreDataStack.swift */; };
 		61F94BFE22D4663E0069E7FE /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */; };
 		61F94C0522D466570069E7FE /* DeliveryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0222D466570069E7FE /* DeliveryListViewController.swift */; };
 		61F94C0922D4666F0069E7FE /* DeliveryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94C0722D4666F0069E7FE /* DeliveryListViewModel.swift */; };
@@ -55,7 +55,7 @@
 		61625A7922D9B48C0030658B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		61625A7D22D9BAC30030658B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		61625A7F22D9BFCF0030658B /* APIServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceManager.swift; sourceTree = "<group>"; };
-		61625A8322D9EFF30030658B /* CoreDataManagerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerExtension.swift; sourceTree = "<group>"; };
+		61625A8322D9EFF30030658B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		61625A9022DA35520030658B /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		61625A9422DA4A7C0030658B /* DeliveryItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryItemView.swift; sourceTree = "<group>"; };
 		61625A9622DAFDFE0030658B /* AppNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
@@ -79,7 +79,7 @@
 		61F94B5E22D45DB10069E7FE /* DeliveryAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAppTests.swift; sourceTree = "<group>"; };
 		61F94B6022D45DB10069E7FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61F94B6F22D45E440069E7FE /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		61F94BF922D465100069E7FE /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		61F94BF922D465100069E7FE /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		61F94C0222D466570069E7FE /* DeliveryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryListViewController.swift; sourceTree = "<group>"; };
 		61F94C0722D4666F0069E7FE /* DeliveryListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryListViewModel.swift; sourceTree = "<group>"; };
@@ -132,6 +132,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6122967422DBA80900BCB1E9 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				61F94B6022D45DB10069E7FE /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		6122967522DBA88E00BCB1E9 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				61A0184C22D523E300403520 /* SuccessResponse.json */,
+				61A0184B22D523E200403520 /* ErrorResponse.json */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		61625A7822D9B3FF0030658B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,18 +187,20 @@
 		61625A8222D9EFAD0030658B /* DatabaseManager */ = {
 			isa = PBXGroup;
 			children = (
-				61F94BF922D465100069E7FE /* CoreDataManager.swift */,
-				61625A8322D9EFF30030658B /* CoreDataManagerExtension.swift */,
+				61F94BF922D465100069E7FE /* CoreDataStack.swift */,
+				61625A8322D9EFF30030658B /* CoreDataManager.swift */,
 			);
 			path = DatabaseManager;
 			sourceTree = "<group>";
 		};
-		61A0184F22D5D87300403520 /* AppConfiguration */ = {
+		61A0184F22D5D87300403520 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
 				61625A7D22D9BAC30030658B /* Configuration.swift */,
+				61F94B5522D45DB10069E7FE /* Info.plist */,
+				61F94C0B22D467D30069E7FE /* GoogleService-Info.plist */,
 			);
-			path = AppConfiguration;
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 		61F94B3A22D45DB00069E7FE = {
@@ -208,11 +227,11 @@
 		61F94B4522D45DB00069E7FE /* DeliveryApp */ = {
 			isa = PBXGroup;
 			children = (
-				61625A7C22D9B8570030658B /* Constent */,
 				61625A7B22D9B8180030658B /* Common */,
-				61625A7822D9B3FF0030658B /* Manager */,
-				61A0184F22D5D87300403520 /* AppConfiguration */,
+				61A0184F22D5D87300403520 /* Configuration */,
+				61625A7C22D9B8570030658B /* Constent */,
 				61F94B6922D45DC30069E7FE /* Extension */,
+				61625A7822D9B3FF0030658B /* Manager */,
 				61F94B6B22D45DD90069E7FE /* Model */,
 				61F94B6A22D45DCD0069E7FE /* Resource */,
 				61F94B6C22D45DDF0069E7FE /* View */,
@@ -224,10 +243,9 @@
 		61F94B5D22D45DB10069E7FE /* DeliveryAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				61A0184B22D523E200403520 /* ErrorResponse.json */,
-				61A0184C22D523E300403520 /* SuccessResponse.json */,
+				6122967522DBA88E00BCB1E9 /* Resource */,
+				6122967422DBA80900BCB1E9 /* Configuration */,
 				61F94B5E22D45DB10069E7FE /* DeliveryAppTests.swift */,
-				61F94B6022D45DB10069E7FE /* Info.plist */,
 			);
 			path = DeliveryAppTests;
 			sourceTree = "<group>";
@@ -249,9 +267,7 @@
 				61F94B5222D45DB10069E7FE /* LaunchScreen.storyboard */,
 				61D1496F22D48D88001FB759 /* Localizable.strings */,
 				61F94B5022D45DB10069E7FE /* Assets.xcassets */,
-				61F94B5522D45DB10069E7FE /* Info.plist */,
 				61F94B4D22D45DB00069E7FE /* DeliveryApp.xcdatamodeld */,
-				61F94C0B22D467D30069E7FE /* GoogleService-Info.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -317,6 +333,7 @@
 				61F94B5622D45DB10069E7FE /* Sources */,
 				61F94B5722D45DB10069E7FE /* Frameworks */,
 				61F94B5822D45DB10069E7FE /* Resources */,
+				0D6BDEFA68418710E3E9704D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -391,6 +408,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D6BDEFA68418710E3E9704D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DeliveryAppTests/Pods-DeliveryAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DeliveryAppTests/Pods-DeliveryAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DeliveryAppTests/Pods-DeliveryAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		61F94C0D22D4681F0069E7FE /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -510,13 +544,13 @@
 				61D1497322D4978A001FB759 /* Location.swift in Sources */,
 				61625A8022D9BFCF0030658B /* APIServiceManager.swift in Sources */,
 				61F94B4F22D45DB00069E7FE /* DeliveryApp.xcdatamodeld in Sources */,
-				61F94BFB22D465100069E7FE /* CoreDataManager.swift in Sources */,
+				61F94BFB22D465100069E7FE /* CoreDataStack.swift in Sources */,
 				61F94C0922D4666F0069E7FE /* DeliveryListViewModel.swift in Sources */,
 				61F94B4722D45DB00069E7FE /* AppDelegate.swift in Sources */,
 				61F94B7322D45E440069E7FE /* Constant.swift in Sources */,
 				61625A7A22D9B48C0030658B /* APIService.swift in Sources */,
 				61D1497122D496F3001FB759 /* Delivery.swift in Sources */,
-				61625A8422D9EFF30030658B /* CoreDataManagerExtension.swift in Sources */,
+				61625A8422D9EFF30030658B /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,7 +716,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				INFOPLIST_FILE = DeliveryApp/Resource/Info.plist;
+				INFOPLIST_FILE = DeliveryApp/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -702,7 +736,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeliveryApp/Resource/Info.plist;
+				INFOPLIST_FILE = DeliveryApp/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -722,7 +756,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeliveryAppTests/Info.plist;
+				INFOPLIST_FILE = DeliveryAppTests/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -744,7 +778,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = DeliveryAppTests/Info.plist;
+				INFOPLIST_FILE = DeliveryAppTests/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
