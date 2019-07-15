@@ -23,8 +23,11 @@ class CoreDataManager: CoreDataManagerProtocol {
         let context = stack.savingContext
         let entityName: String = String(describing: DeliveryItem.self)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        stack.executeRequest(request: deleteRequest, context: context)
+        let objects  = try? context.fetch(fetchRequest) as? [NSManagedObject]
+        _ = objects.map { $0.map { context.delete($0) } }
+        stack.saveContext(context: context)
+        //let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        //_ = try? stack.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: context)
     }
 
     // Get Delivery Count

@@ -69,11 +69,13 @@ class DatabaseManagerTest: XCTestCase {
     }
 
     // delete query can not work with in memory storage
-//    func testClearAllData() {
-//        coreDataManager.clearData()
-//        let count = coreDataManager.getDeliveryCount()
-//        XCTAssertEqual(count, 0)
-//    }
+    func testClearAllData() {
+        let delivery = createDummyDelivery()
+        coreDataManager.saveInCoreData(array: [delivery])
+        coreDataManager.clearData()
+        let count = coreDataManager.getDeliveryCount()
+        XCTAssertEqual(count, 0)
+    }
 
     func testSaveData() {
         let delivery = createDummyDelivery()

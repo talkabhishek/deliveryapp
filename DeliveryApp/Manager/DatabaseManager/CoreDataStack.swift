@@ -48,10 +48,6 @@ class CoreDataStack {
     }
 
     // MARK: - Core Data Saving support
-    func saveManagedContext () {
-        saveContext(context: managedContext)
-    }
-
     func saveContext (context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
@@ -60,15 +56,6 @@ class CoreDataStack {
                 let nserror = error as NSError
                 debugPrint("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-        }
-    }
-
-    func executeRequest(request: NSPersistentStoreRequest,
-                        context: NSManagedObjectContext) {
-        do {
-            try persistentContainer.persistentStoreCoordinator.execute(request, with: context)
-        } catch {
-            debugPrint("There is an error in deleting records", error.localizedDescription)
         }
     }
 
