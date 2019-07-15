@@ -1,5 +1,3 @@
-# Project lists items and show details.
-
 # Requirement & Support
 Xcode : 10.2.1
 Swift 5
