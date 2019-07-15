@@ -112,7 +112,7 @@ class DeliveryListViewController: UIViewController {
         tableView.delegate = self
         tableView.reloadData()
         if let error = error {
-            showAlert(message: error.localizedDescription)
+            showBannerWith(subtitle: error.localizedDescription)
         }
     }
 
