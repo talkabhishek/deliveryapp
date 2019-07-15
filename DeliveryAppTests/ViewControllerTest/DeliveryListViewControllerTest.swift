@@ -50,7 +50,7 @@ class DeliveryListViewControllerTest: XCTestCase {
     }
 
     func testCellConfiguration() {
-        let tableView = deliveryListVC.tableViewObject()
+        let tableView = deliveryListVC.tableView
         let delivery = createDummyDelivery()
         deliveryListVC.deliveryListViewModel.deliveryViewModels = [DeliveryViewModel(item: delivery)]
         let cell = deliveryListVC.tableView(tableView, cellForRowAt: IndexPath(row: 0, section: 0))
@@ -59,16 +59,14 @@ class DeliveryListViewControllerTest: XCTestCase {
 
     func testShouldNotShowNoResultMessage () {
         if deliveryListVC.deliveryListViewModel.deliveryViewModels.count > 0 {
-            let tableView = deliveryListVC.tableViewObject()
-            XCTAssertNil(tableView.tableHeaderView)
+            XCTAssertTrue(deliveryListVC.noDataFoundLabel.isHidden)
         }
     }
 
     func testShouldShowNoResultMessage () {
         deliveryListVC.updateUIOnResponse()
         if deliveryListVC.deliveryListViewModel.deliveryViewModels.count == 0 {
-            let tableView = deliveryListVC.tableViewObject()
-            XCTAssertNotNil(tableView.tableHeaderView)
+            XCTAssertFalse(deliveryListVC.noDataFoundLabel.isHidden)
         }
     }
 
@@ -76,23 +74,21 @@ class DeliveryListViewControllerTest: XCTestCase {
         let delivery = createDummyDelivery()
         deliveryListVC.deliveryListViewModel.setListValues(deliveries: [delivery])
         deliveryListVC.updateUIOnResponse()
-        let tableView = deliveryListVC.tableViewObject()
-        XCTAssertNil(tableView.tableHeaderView)
+        XCTAssertTrue(deliveryListVC.noDataFoundLabel.isHidden)
     }
 
     func testUpdateUIOnError() {
         deliveryListVC.deliveryListViewModel.deliveryViewModels = []
         let error = NSError.init(domain: "Custom error", code: 500, userInfo: nil)
         deliveryListVC.updateUIOnResponse(error: error)
-        let tableView = deliveryListVC.tableViewObject()
-        XCTAssertNotNil(tableView.tableHeaderView)
+        XCTAssertFalse(deliveryListVC.noDataFoundLabel.isHidden)
     }
 
     func testControllerOnSelection() {
-        let tableView = deliveryListVC.tableViewObject()
         let delivery = createDummyDelivery()
         deliveryListVC.deliveryListViewModel.deliveryViewModels = [DeliveryViewModel(item: delivery)]
-        deliveryListVC.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        let indexPath = IndexPath(row: 0, section: 0)
+        deliveryListVC.pushDetailViewController(indexPath: indexPath)
         XCTAssertTrue(navigationController.viewControllers.last is DeliveryDetailViewController)
     }
 

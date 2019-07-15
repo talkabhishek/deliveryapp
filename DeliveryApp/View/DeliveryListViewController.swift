@@ -15,7 +15,7 @@ class DeliveryListViewController: UIViewController {
     var deliveryListViewModel: DeliveryListViewModel!
     var observers = [NSKeyValueObservation]()
 
-    private let tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(DeliveryTableViewCell.self, forCellReuseIdentifier: DeliveryTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
@@ -35,7 +35,7 @@ class DeliveryListViewController: UIViewController {
         return activityIndicator
     }()
 
-    private let noDataFoundView: UIView = {
+    let noDataFoundLabel: UILabel = {
         let infoLabel = UILabel(frame: CGRect(x: ViewConstant.zero,
                                               y: ViewConstant.zero,
                                               width: ViewConstant.noDataLabelWidth,
@@ -65,8 +65,16 @@ class DeliveryListViewController: UIViewController {
         // Add table view
         view.addSubview(tableView)
         tableView.fillSuperview()
+        tableView.tableHeaderView = UIView()
         tableView.tableFooterView = activityIndicator
         tableView.tableFooterView?.isHidden = true
+
+        // Add no data view
+        view.addSubview(noDataFoundLabel)
+        noDataFoundLabel.anchor(widthConstant: ViewConstant.noDataLabelWidth,
+                                heightConstant: ViewConstant.noDataLabelHeight)
+        noDataFoundLabel.anchorCenterSuperview()
+        noDataFoundLabel.isHidden = true
 
         // Add referesh control
         refreshControl.addTarget(self, action: #selector(refreshBody), for: UIControl.Event.valueChanged)
@@ -94,9 +102,9 @@ class DeliveryListViewController: UIViewController {
     // Update tableview data
     func updateUIOnResponse(error: Error? = nil) {
         if deliveryListViewModel.deliveryViewModels.count == 0 {
-            tableView.tableHeaderView = noDataFoundView
+            noDataFoundLabel.isHidden = false
         } else {
-            tableView.tableHeaderView = nil
+            noDataFoundLabel.isHidden = true
         }
         tableView.tableFooterView?.isHidden = true
         refreshControl.endRefreshing()
@@ -106,6 +114,13 @@ class DeliveryListViewController: UIViewController {
         if let error = error {
             showAlert(message: error.localizedDescription)
         }
+    }
+
+    func pushDetailViewController(indexPath: IndexPath) {
+        let item = deliveryListViewModel.deliveryViewModels[indexPath.row]
+        let deliveryDetail = DeliveryDetailViewController()
+        deliveryDetail.deliveryItemViewModel = item
+        self.navigationController?.show(deliveryDetail, sender: true)
     }
 
     deinit {
@@ -151,19 +166,6 @@ extension DeliveryListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let item = deliveryListViewModel.deliveryViewModels[indexPath.row]
-        let deliveryDetail = DeliveryDetailViewController()
-        deliveryDetail.deliveryItemViewModel = item
-        self.navigationController?.show(deliveryDetail, sender: true)
+        pushDetailViewController(indexPath: indexPath)
     }
 }
-
-// won't ship this extension with production code thanks to #if DEBUG
-// exposing tableview object to perform test"
-#if DEBUG
-extension DeliveryListViewController {
-    public func tableViewObject() -> UITableView {
-        return self.tableView
-    }
-}
-#endif
