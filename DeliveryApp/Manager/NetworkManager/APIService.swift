@@ -9,26 +9,6 @@
 import Foundation
 import Alamofire
 
-public enum NetworkError: Error {
-    case serverError(String)
-}
-
-struct ErrorResponse {
-    var message: String
-
-    init(error: Error) {
-        message = error.localizedDescription
-    }
-
-    init(error: NetworkError) {
-        message = error.localizedDescription
-        switch error {
-        case .serverError(let errorMessage):
-            message = errorMessage
-        }
-    }
-}
-
 enum APIService {
     static let baseUrl = Configuration.shared.env.baseURL
     var baseUrl: String { return Configuration.shared.env.baseURL }

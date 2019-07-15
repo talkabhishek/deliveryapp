@@ -39,5 +39,4 @@ enum Environment: String {
         case .production: return "https://mock-api-mobile.dev.lalamove.com/"
         }
     }
-
 }

@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		494D789DD11D3FD2FA853B40 /* Pods_DeliveryApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C70C6BFB9CBB68A4ECEF95 /* Pods_DeliveryApp.framework */; };
+		6122967A22DC3C1700BCB1E9 /* DeliveryListViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122967922DC3C1700BCB1E9 /* DeliveryListViewControllerTest.swift */; };
+		6122967C22DC3C4E00BCB1E9 /* DeliveryDetailViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122967B22DC3C4E00BCB1E9 /* DeliveryDetailViewControllerTest.swift */; };
+		6122967E22DC3D1700BCB1E9 /* DeliveryListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122967D22DC3D1700BCB1E9 /* DeliveryListViewModelTest.swift */; };
+		6122968022DC3D2D00BCB1E9 /* DeliveryViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122967F22DC3D2D00BCB1E9 /* DeliveryViewModelTest.swift */; };
+		6122968222DC3DBC00BCB1E9 /* DatabaseManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122968122DC3DBC00BCB1E9 /* DatabaseManagerTest.swift */; };
+		6122968422DC3DCD00BCB1E9 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122968322DC3DCD00BCB1E9 /* NetworkManagerTest.swift */; };
+		6122968622DC599A00BCB1E9 /* UIMapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122968522DC599A00BCB1E9 /* UIMapViewExtension.swift */; };
+		6122968822DC733600BCB1E9 /* MockCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122968722DC733600BCB1E9 /* MockCoreDataManager.swift */; };
+		6122968A22DC734C00BCB1E9 /* MockAPIServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6122968922DC734C00BCB1E9 /* MockAPIServiceManager.swift */; };
 		61625A7A22D9B48C0030658B /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A7922D9B48C0030658B /* APIService.swift */; };
 		61625A7E22D9BAC30030658B /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A7D22D9BAC30030658B /* Configuration.swift */; };
 		61625A8022D9BFCF0030658B /* APIServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61625A7F22D9BFCF0030658B /* APIServiceManager.swift */; };
@@ -52,6 +61,15 @@
 
 /* Begin PBXFileReference section */
 		14C70C6BFB9CBB68A4ECEF95 /* Pods_DeliveryApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeliveryApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6122967922DC3C1700BCB1E9 /* DeliveryListViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryListViewControllerTest.swift; sourceTree = "<group>"; };
+		6122967B22DC3C4E00BCB1E9 /* DeliveryDetailViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryDetailViewControllerTest.swift; sourceTree = "<group>"; };
+		6122967D22DC3D1700BCB1E9 /* DeliveryListViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryListViewModelTest.swift; sourceTree = "<group>"; };
+		6122967F22DC3D2D00BCB1E9 /* DeliveryViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryViewModelTest.swift; sourceTree = "<group>"; };
+		6122968122DC3DBC00BCB1E9 /* DatabaseManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManagerTest.swift; sourceTree = "<group>"; };
+		6122968322DC3DCD00BCB1E9 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
+		6122968522DC599A00BCB1E9 /* UIMapViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMapViewExtension.swift; sourceTree = "<group>"; };
+		6122968722DC733600BCB1E9 /* MockCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManager.swift; sourceTree = "<group>"; };
+		6122968922DC734C00BCB1E9 /* MockAPIServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIServiceManager.swift; sourceTree = "<group>"; };
 		61625A7922D9B48C0030658B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		61625A7D22D9BAC30030658B /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		61625A7F22D9BFCF0030658B /* APIServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceManager.swift; sourceTree = "<group>"; };
@@ -149,6 +167,35 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		6122967622DC36E300BCB1E9 /* ManagerTest */ = {
+			isa = PBXGroup;
+			children = (
+				6122968122DC3DBC00BCB1E9 /* DatabaseManagerTest.swift */,
+				6122968322DC3DCD00BCB1E9 /* NetworkManagerTest.swift */,
+			);
+			path = ManagerTest;
+			sourceTree = "<group>";
+		};
+		6122967722DC36EE00BCB1E9 /* ViewModelTest */ = {
+			isa = PBXGroup;
+			children = (
+				6122968722DC733600BCB1E9 /* MockCoreDataManager.swift */,
+				6122968922DC734C00BCB1E9 /* MockAPIServiceManager.swift */,
+				6122967D22DC3D1700BCB1E9 /* DeliveryListViewModelTest.swift */,
+				6122967F22DC3D2D00BCB1E9 /* DeliveryViewModelTest.swift */,
+			);
+			path = ViewModelTest;
+			sourceTree = "<group>";
+		};
+		6122967822DC370200BCB1E9 /* ViewControllerTest */ = {
+			isa = PBXGroup;
+			children = (
+				6122967922DC3C1700BCB1E9 /* DeliveryListViewControllerTest.swift */,
+				6122967B22DC3C4E00BCB1E9 /* DeliveryDetailViewControllerTest.swift */,
+			);
+			path = ViewControllerTest;
+			sourceTree = "<group>";
+		};
 		61625A7822D9B3FF0030658B /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,9 +290,12 @@
 		61F94B5D22D45DB10069E7FE /* DeliveryAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				6122967522DBA88E00BCB1E9 /* Resource */,
 				6122967422DBA80900BCB1E9 /* Configuration */,
 				61F94B5E22D45DB10069E7FE /* DeliveryAppTests.swift */,
+				6122967622DC36E300BCB1E9 /* ManagerTest */,
+				6122967522DBA88E00BCB1E9 /* Resource */,
+				6122967822DC370200BCB1E9 /* ViewControllerTest */,
+				6122967722DC36EE00BCB1E9 /* ViewModelTest */,
 			);
 			path = DeliveryAppTests;
 			sourceTree = "<group>";
@@ -257,6 +307,7 @@
 				61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */,
 				61D1497622D4B446001FB759 /* UIAlertControllerExtension.swift */,
 				61D1497822D4B4DE001FB759 /* UIViewControllerExtension.swift */,
+				6122968522DC599A00BCB1E9 /* UIMapViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -533,6 +584,7 @@
 				61F94C0522D466570069E7FE /* DeliveryListViewController.swift in Sources */,
 				61625A9522DA4A7C0030658B /* DeliveryItemView.swift in Sources */,
 				61A0185522D5E42E00403520 /* DeliveryDetailViewController.swift in Sources */,
+				6122968622DC599A00BCB1E9 /* UIMapViewExtension.swift in Sources */,
 				61625A9122DA35520030658B /* UIViewExtension.swift in Sources */,
 				61625A7E22D9BAC30030658B /* Configuration.swift in Sources */,
 				61F94C0A22D4666F0069E7FE /* DeliveryViewModel.swift in Sources */,
@@ -558,6 +610,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6122968A22DC734C00BCB1E9 /* MockAPIServiceManager.swift in Sources */,
+				6122968222DC3DBC00BCB1E9 /* DatabaseManagerTest.swift in Sources */,
+				6122967A22DC3C1700BCB1E9 /* DeliveryListViewControllerTest.swift in Sources */,
+				6122967C22DC3C4E00BCB1E9 /* DeliveryDetailViewControllerTest.swift in Sources */,
+				6122968422DC3DCD00BCB1E9 /* NetworkManagerTest.swift in Sources */,
+				6122968822DC733600BCB1E9 /* MockCoreDataManager.swift in Sources */,
+				6122967E22DC3D1700BCB1E9 /* DeliveryListViewModelTest.swift in Sources */,
+				6122968022DC3D2D00BCB1E9 /* DeliveryViewModelTest.swift in Sources */,
 				61F94B5F22D45DB10069E7FE /* DeliveryAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

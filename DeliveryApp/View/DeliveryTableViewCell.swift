@@ -49,14 +49,6 @@ class DeliveryTableViewCell: UITableViewCell {
         setupViewConstraints(marginGuide: contentView.layoutMarginsGuide)
     }
 
-    init() {
-        super.init(style: .default, reuseIdentifier: DeliveryTableViewCell.identifier)
-        self.backgroundColor = .white
-        self.addSubview(deliveryItemImage)
-        self.addSubview(deliveryItemLabel)
-        setupViewConstraints(marginGuide: self.layoutMarginsGuide)
-    }
-
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

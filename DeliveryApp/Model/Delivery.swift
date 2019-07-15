@@ -12,7 +12,7 @@ struct Delivery: Codable {
     let id: Int
     let desc: String
     let imageURL: String
-    let location: Location?
+    let location: Location
 
     enum CodingKeys: String, CodingKey {
         case id

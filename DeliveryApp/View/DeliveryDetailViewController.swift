@@ -12,6 +12,8 @@ import MapKit
 class DeliveryDetailViewController: UIViewController {
     // MARK: - Instance variables
     var deliveryItemViewModel: DeliveryViewModel!
+    var mapView: MKMapView!
+    var deliveryInfoView: DeliveryItemView!
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -26,18 +28,14 @@ class DeliveryDetailViewController: UIViewController {
 
     // MARK: Setup view programatically
     private func setupViews() {
-        let mapView = MKMapView()
+        mapView = MKMapView()
         mapView.delegate = self
-        let regionRadius: CLLocationDistance = 1000
-        let coordinateRegion = MKCoordinateRegion(center: deliveryItemViewModel.coordinate,
-                                                  latitudinalMeters: regionRadius,
-                                                  longitudinalMeters: regionRadius)
-        mapView.setRegion(coordinateRegion, animated: true)
+        mapView.centerMapOn(coordinate: deliveryItemViewModel.coordinate)
         mapView.addAnnotation(deliveryItemViewModel)
         view.addSubview(mapView)
         mapView.fillSuperview()
 
-        let deliveryInfoView = DeliveryItemView()
+        deliveryInfoView = DeliveryItemView()
         deliveryInfoView.deliveryItem = deliveryItemViewModel
         view.addSubview(deliveryInfoView)
         deliveryInfoView.anchor(top: nil,

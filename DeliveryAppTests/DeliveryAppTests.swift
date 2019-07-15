@@ -42,11 +42,11 @@ class DeliveryAppTests: XCTestCase {
 //        wait(for: [promise], timeout: 10)
 //    }
 
-    func testClearData() {
-        deliveryListViewModel.clearList()
-        let count = deliveryListViewModel.deliveryViewModels.count
-        XCTAssertEqual(count, 0, "Delivery count should be zero")
-    }
+//    func testClearData() {
+//        deliveryListViewModel.clearList()
+//        let count = deliveryListViewModel.deliveryViewModels.count
+//        XCTAssertEqual(count, 0, "Delivery count should be zero")
+//    }
 
 //    func testSaveData() {
 //        deliveryListViewModel.clearList()

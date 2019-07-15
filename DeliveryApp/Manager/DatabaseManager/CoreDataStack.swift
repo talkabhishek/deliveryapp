@@ -11,13 +11,14 @@ import CoreData
 
 class CoreDataStack {
 
+    //static let shared = CoreDataStack(modelName: PersistentContainer.name)
     private let modelName: String
     init(modelName: String) {
         self.modelName = modelName
     }
 
     // MARK: - Core Data stack
-    private lazy var persistentContainer: NSPersistentContainer = {
+    lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
@@ -26,6 +27,7 @@ class CoreDataStack {
          */
         let container = NSPersistentContainer(name: modelName)
         container.loadPersistentStores(completionHandler: { (_, error) in
+            // Check if creating container wrong
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
@@ -66,7 +68,7 @@ class CoreDataStack {
         do {
             try persistentContainer.persistentStoreCoordinator.execute(request, with: context)
         } catch {
-            debugPrint("There is an error in deleting records")
+            debugPrint("There is an error in deleting records", error.localizedDescription)
         }
     }
 

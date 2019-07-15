@@ -17,7 +17,7 @@ protocol CoreDataManagerProtocol {
 }
 
 class CoreDataManager: CoreDataManagerProtocol {
-    fileprivate lazy var stack: CoreDataStack = CoreDataStack(modelName: PersistentContainer.name)
+    lazy var stack: CoreDataStack = CoreDataStack(modelName: PersistentContainer.name)
     // MARK: - Clear Data for Entity
     func clearData() {
         let context = stack.savingContext

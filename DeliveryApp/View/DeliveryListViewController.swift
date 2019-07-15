@@ -77,10 +77,10 @@ class DeliveryListViewController: UIViewController {
         self.observers = [
             deliveryListViewModel.observe(\DeliveryListViewModel.deliveryViewModels,
                                           options: [.old, .new]) { [weak self] (_, _) in
-                                            self?.updateDataSource()
+                                            self?.updateUIOnResponse()
             }, deliveryListViewModel.observe(\DeliveryListViewModel.error,
                                              options: [.old, .new]) { [weak self] (_, changedValue) in
-                                                self?.updateUIOnError(error: changedValue.newValue as? Error)
+                                                self?.updateUIOnResponse(error: changedValue.newValue as? Error)
             }
         ]
     }
@@ -88,28 +88,11 @@ class DeliveryListViewController: UIViewController {
     // MARK: Helper function
     // Pull to refresh action
     @objc func refreshBody(sender: Any) {
-        // Code to refresh table view
         deliveryListViewModel.getDeliveries(refresh: true)
     }
 
-    func handleResponse(error: ErrorResponse?) {
-        if let error = error {
-            self.showAlert(message: error.message, dismissAction: {
-                self.refreshControl.endRefreshing()
-                self.tableView.tableFooterView?.isHidden = true
-                if self.deliveryListViewModel.deliveryViewModels.count == 0 {
-                    self.tableView.tableHeaderView = self.noDataFoundView
-                }
-            })
-        } else {
-            self.refreshControl.endRefreshing()
-            self.tableView.tableFooterView?.isHidden = true
-            self.updateDataSource()
-        }
-    }
-
     // Update tableview data
-    private func updateDataSource() {
+    func updateUIOnResponse(error: Error? = nil) {
         if deliveryListViewModel.deliveryViewModels.count == 0 {
             tableView.tableHeaderView = noDataFoundView
         } else {
@@ -119,12 +102,6 @@ class DeliveryListViewController: UIViewController {
         refreshControl.endRefreshing()
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.reloadData()
-    }
-
-    private func updateUIOnError(error: Error?) {
-        tableView.tableFooterView?.isHidden = true
-        refreshControl.endRefreshing()
         tableView.reloadData()
         if let error = error {
             showAlert(message: error.localizedDescription)
@@ -180,3 +157,13 @@ extension DeliveryListViewController: UITableViewDelegate {
         self.navigationController?.show(deliveryDetail, sender: true)
     }
 }
+
+// won't ship this extension with production code thanks to #if DEBUG
+// exposing tableview object to perform test"
+#if DEBUG
+extension DeliveryListViewController {
+    public func tableViewObject() -> UITableView {
+        return self.tableView
+    }
+}
+#endif

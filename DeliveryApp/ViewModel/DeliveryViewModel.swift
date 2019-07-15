@@ -31,11 +31,11 @@ class DeliveryViewModel: NSObject {
 // Confirm MKAnnotation for Map
 extension DeliveryViewModel: MKAnnotation {
     public var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: item.location?.lat ?? 0, longitude: item.location?.lng ?? 0)
+        return CLLocationCoordinate2D(latitude: item.location.lat, longitude: item.location.lng)
     }
 
     public var title: String? {
-        return item.location?.address
+        return item.location.address
     }
 
     public var subtitle: String? {
