@@ -46,7 +46,6 @@ class CoreDataManager: CoreDataManagerProtocol {
         let context = stack.savingContext
         _ = array.map { self.createDeliveryItem(item: $0, context: context) }
         stack.saveContext(context: context)
-        //try? context.save()
     }
 
     func getDeliveryList(offset: Int, limit: Int) -> [Delivery] {

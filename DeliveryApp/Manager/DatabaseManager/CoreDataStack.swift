@@ -11,7 +11,6 @@ import CoreData
 
 class CoreDataStack {
 
-    //static let shared = CoreDataStack(modelName: PersistentContainer.name)
     private let modelName: String
     init(modelName: String) {
         self.modelName = modelName

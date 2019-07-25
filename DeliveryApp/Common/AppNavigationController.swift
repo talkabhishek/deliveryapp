@@ -19,7 +19,6 @@ class AppNavigationController: UINavigationController {
         self.navigationBar.titleTextAttributes =
             [NSAttributedString.Key.foregroundColor:
             ColorConstant.navigationTint, NSAttributedString.Key.font: FontConstant.systemBold]
-        //self.navigationBar.setBackgroundImage(UIImage(named: "topbar-bg"), for: .topAttached, barMetrics: .default)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

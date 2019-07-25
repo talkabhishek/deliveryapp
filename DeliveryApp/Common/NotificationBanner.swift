@@ -11,7 +11,6 @@ import NotificationBannerSwift
 
 // MARK: NotificationBanner
 func showBannerWith(title: String? = nil, subtitle: String?, style: BannerStyle = BannerStyle.danger) {
-    //let banner = NotificationBanner(title: title, subtitle: subtitle, style: style)
     let banner = GrowingNotificationBanner(title: title, subtitle: subtitle, style: style)
     banner.show()
 }

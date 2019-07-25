@@ -47,8 +47,6 @@ class DeliveryDetailViewController: UIViewController {
                                 rightConstant: 15,
                                 widthConstant: 0,
                                 heightConstant: 0)
-
-        deliveryInfoView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
     }
 }
 
