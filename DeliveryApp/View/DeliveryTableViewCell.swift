@@ -18,7 +18,7 @@ class DeliveryTableViewCell: UITableViewCell {
         didSet {
             if let item = deliveryItem {
                 self.deliveryItemImage.setImageWith(URL: item.imageURL)
-                self.deliveryItemLabel.text = item.itemId + item.description
+                self.deliveryItemLabel.text = item.description
             }
         }
     }
