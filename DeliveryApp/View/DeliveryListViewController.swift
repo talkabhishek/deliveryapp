@@ -150,14 +150,9 @@ extension DeliveryListViewController: UITableViewDataSource {
 // Table view Delegate function
 extension DeliveryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastSectionIndex = tableView.numberOfSections - 1
-        let numOfRows = tableView.numberOfRows(inSection: lastSectionIndex)
-        let lastRowIndex = numOfRows - 1
-        if indexPath.section == lastSectionIndex &&
-            indexPath.row == lastRowIndex {
-            tableView.tableFooterView?.isHidden = false
-            deliveryListViewModel.getDeliveries(offset: numOfRows)
-        }
+        let numOfSections = tableView.numberOfSections
+        let numOfRows = tableView.numberOfRows(inSection: numOfSections - 1)
+        deliveryListViewModel.loadMoreData(numOfSections: numOfSections, numOfRows: numOfRows, indexPath: indexPath)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
