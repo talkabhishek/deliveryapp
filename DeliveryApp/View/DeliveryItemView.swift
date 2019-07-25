@@ -10,13 +10,6 @@ import UIKit
 
 class DeliveryItemView: UIView {
 
-    var deliveryItem: DeliveryViewModel? {
-        didSet {
-            self.deliveryItemImage.setImageWith(URL: deliveryItem?.imageURL ?? "")
-            self.deliveryItemLabel.text = deliveryItem?.description
-        }
-    }
-
     private let deliveryItemLabel: UILabel = {
         let label = UILabel()
         label.textColor = ColorConstant.cellText
@@ -34,7 +27,7 @@ class DeliveryItemView: UIView {
         return imgView
     }()
 
-    init() {
+    init(item: DeliveryViewModel) {
         super.init(frame: CGRect.zero)
         self.backgroundColor = .white
         self.layer.cornerRadius = 5
@@ -42,6 +35,8 @@ class DeliveryItemView: UIView {
         self.layer.borderWidth = 0.5
         self.addSubview(deliveryItemImage)
         self.addSubview(deliveryItemLabel)
+        deliveryItemImage.setImageWith(URL: item.imageURL)
+        deliveryItemLabel.text = item.description
         setupViewConstraints()
     }
 

@@ -35,8 +35,7 @@ class DeliveryDetailViewController: UIViewController {
         view.addSubview(mapView)
         mapView.fillSuperview()
 
-        deliveryInfoView = DeliveryItemView()
-        deliveryInfoView.deliveryItem = deliveryItemViewModel
+        deliveryInfoView = DeliveryItemView(item: deliveryItemViewModel)
         view.addSubview(deliveryInfoView)
         deliveryInfoView.anchor(top: nil,
                                 left: view.leftAnchor,
