@@ -123,6 +123,17 @@ class DeliveryListViewController: UIViewController {
         self.navigationController?.show(deliveryDetail, sender: true)
     }
 
+    func loadMoreData(numOfSections: Int, numOfRows: Int, indexPath: IndexPath) {
+        let lastSectionIndex = numOfSections - 1
+        let lastRowIndex = numOfRows - 1
+        // Check for last row of last section
+        if indexPath.section == lastSectionIndex &&
+            indexPath.row == lastRowIndex {
+            tableView.tableFooterView?.isHidden = false
+            deliveryListViewModel.getDeliveries(offset: numOfRows)
+        }
+    }
+
     deinit {
         _ = observers.map({$0.invalidate()})
     }
@@ -152,7 +163,7 @@ extension DeliveryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let numOfSections = tableView.numberOfSections
         let numOfRows = tableView.numberOfRows(inSection: numOfSections - 1)
-        deliveryListViewModel.loadMoreData(numOfSections: numOfSections, numOfRows: numOfRows, indexPath: indexPath)
+        loadMoreData(numOfSections: numOfSections, numOfRows: numOfRows, indexPath: indexPath)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

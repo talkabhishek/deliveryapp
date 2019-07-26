@@ -41,15 +41,6 @@ class DeliveryListViewModel: NSObject {
         }
     }
 
-    func loadMoreData(numOfSections: Int, numOfRows: Int, indexPath: IndexPath) {
-        let lastSectionIndex = numOfSections - 1
-        let lastRowIndex = numOfRows - 1
-        if indexPath.section == lastSectionIndex &&
-            indexPath.row == lastRowIndex {
-            getDeliveries(offset: numOfRows)
-        }
-    }
-
     // Clear data action
     func clearList() {
         coreDataManager.clearData()
