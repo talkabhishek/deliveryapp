@@ -12,7 +12,7 @@ import Alamofire
 typealias Callback<T> = (Result<T, Error>) -> Swift.Void
 
 protocol APIServiceManagerProtocol {
-    func getDeliveryList(offset: Int, limit: Int, completion: @escaping (Callback<[Delivery]>))
+    func getDeliveryList(offset: Int, limit: Int, completion: @escaping (Callback<[DeliveryItem]>))
 }
 
 class APIServiceManager: APIServiceManagerProtocol {
@@ -26,15 +26,20 @@ class APIServiceManager: APIServiceManagerProtocol {
                                  parameters: service.parameters,
                                  encoding: URLEncoding.queryString,
                                  headers: nil, interceptor: nil)
-        request.responseDecodable { (response: DataResponse<T>) in
+        let decoder = JSONDecoder()
+        guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
+            fatalError("Failed to retrieve managed object context")
+        }
+        decoder.userInfo[codingUserInfoKeyManagedObjectContext] = CoreDataStack.shared.managedContext
+        request.responseDecodable(queue: DispatchQueue.main, decoder: decoder) { (response: DataResponse<T>) in
             completion(response.result)
         }
     }
 
     // MARK: - User API's
-    func getDeliveryList(offset: Int, limit: Int, completion: @escaping (Callback<[Delivery]>)) {
+    func getDeliveryList(offset: Int, limit: Int, completion: @escaping (Callback<[DeliveryItem]>)) {
         sendWebRequest(service: APIService.deliveries(offset: offset, limit:
-            limit)) { (response: Result<[Delivery], Error>) in
+            limit)) { (response: Result<[DeliveryItem], Error>) in
             completion(response)
         }
     }

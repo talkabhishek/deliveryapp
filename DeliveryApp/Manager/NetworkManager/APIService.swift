@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 
 enum APIService {
-    static let baseUrl = Configuration.shared.env.baseURL
     var baseUrl: String { return Configuration.shared.env.baseURL }
 
     // Add all API as cases

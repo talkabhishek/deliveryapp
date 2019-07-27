@@ -47,13 +47,8 @@ class DeliveryListViewModel: NSObject {
         deliveryViewModels = []
     }
 
-    // Save data action
-    func saveData(deliveries: [Delivery]) {
-        coreDataManager.saveInCoreData(array: deliveries)
-    }
-
     // Set view model
-    func setListValues(deliveries: [Delivery], refresh: Bool = false) {
+    func setListValues(deliveries: [DeliveryItem], refresh: Bool = false) {
         let dvm = deliveries.map {DeliveryViewModel(item: $0) }
         if refresh {
             coreDataManager.clearData()

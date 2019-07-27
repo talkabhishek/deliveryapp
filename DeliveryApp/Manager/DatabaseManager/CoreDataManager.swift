@@ -12,12 +12,12 @@ import CoreData
 protocol CoreDataManagerProtocol {
     func clearData()
     func getDeliveryCount() -> Int
-    func saveInCoreData(array: [Delivery])
-    func getDeliveryList(offset: Int, limit: Int) -> [Delivery]
+    func saveInCoreData(array: [DeliveryItem])
+    func getDeliveryList(offset: Int, limit: Int) -> [DeliveryItem]
 }
 
 class CoreDataManager: CoreDataManagerProtocol {
-    lazy var stack: CoreDataStack = CoreDataStack(modelName: PersistentContainer.name)
+    lazy var stack: CoreDataStack = CoreDataStack.shared
     // MARK: - Clear Data for Entity
     func clearData() {
         let context = stack.savingContext
@@ -42,13 +42,13 @@ class CoreDataManager: CoreDataManagerProtocol {
     }
 
     // MARK: - Save list to Core Data
-    func saveInCoreData(array: [Delivery]) {
-        let context = stack.savingContext
-        _ = array.map { self.createDeliveryItem(item: $0, context: context) }
-        stack.saveContext(context: context)
+    func saveInCoreData(array: [DeliveryItem]) {
+        DispatchQueue.global().async {
+            self.stack.saveContext(context: self.stack.managedContext)
+        }
     }
 
-    func getDeliveryList(offset: Int, limit: Int) -> [Delivery] {
+    func getDeliveryList(offset: Int, limit: Int) -> [DeliveryItem] {
         let context = stack.managedContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.returnsObjectsAsFaults = false
@@ -56,48 +56,12 @@ class CoreDataManager: CoreDataManagerProtocol {
         fetchRequest.fetchLimit = limit
         let entityDesc = NSEntityDescription.entity(forEntityName: String(describing: DeliveryItem.self), in: context)
         fetchRequest.entity = entityDesc
-        let fetchedOjects = try? context.fetch(fetchRequest)
+        var fetchedOjects = try? context.fetch(fetchRequest)
             as? [DeliveryItem]
-        var deliveries = fetchedOjects?.map { createDelivery(From: $0) }
-        deliveries?.sort { (item1, item2) -> Bool in
+        fetchedOjects?.sort { (item1, item2) -> Bool in
             return item1.id < item2.id
         }
-        return deliveries ?? []
-    }
-
-    // Helper methods
-    private func createDeliveryItem(item: Delivery?, context: NSManagedObjectContext) -> DeliveryItem? {
-        if let deliveryEntity = NSEntityDescription.insertNewObject(forEntityName:
-            String(describing: DeliveryItem.self), into: context) as? DeliveryItem {
-            deliveryEntity.id = Int32(item?.id ?? 0)
-            deliveryEntity.desc = item?.desc
-            deliveryEntity.imageURL = item?.imageURL
-            deliveryEntity.locationItem = createLocationItem(item: item?.location, context: context)
-        }
-        return nil
-    }
-
-    private func createLocationItem(item: Location?, context: NSManagedObjectContext) -> LocationItem? {
-        if let locationEntity = NSEntityDescription.insertNewObject(forEntityName:
-            String(describing: LocationItem.self), into: context) as? LocationItem {
-            locationEntity.lat = item?.lat ?? 0
-            locationEntity.lng = item?.lng ?? 0
-            locationEntity.address = item?.address
-            locationEntity.deliveryItem = nil
-            return locationEntity
-        }
-        return nil
-    }
-
-    private func createDelivery(From item: DeliveryItem?) -> Delivery {
-        return Delivery(id: Int(item?.id ?? 0),
-                        desc: item?.desc ?? "",
-                        imageURL: item?.imageURL ?? "",
-                        location: createLocation(From: item?.locationItem))
-    }
-
-    private func createLocation(From item: LocationItem?) -> Location {
-        return Location(lat: item?.lat ?? 0, lng: item?.lng ?? 0, address: item?.address ?? "")
+        return fetchedOjects ?? []
     }
 
 }

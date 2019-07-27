@@ -10,14 +10,14 @@ import Foundation
 import MapKit
 
 class DeliveryViewModel: NSObject {
-    private let item: Delivery
+    private let item: DeliveryItem
 
-    init(item: Delivery) {
+    init(item: DeliveryItem) {
         self.item = item
     }
 
     var imageURL: String {
-        return item.imageURL
+        return item.imageURL ?? ""
     }
 
     var itemId: String {
@@ -25,17 +25,17 @@ class DeliveryViewModel: NSObject {
     }
 
     override var description: String {
-        return item.desc
+        return item.desc ?? ""
     }
 }
 // Confirm MKAnnotation for Map
 extension DeliveryViewModel: MKAnnotation {
     public var coordinate: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: item.location.lat, longitude: item.location.lng)
+        return CLLocationCoordinate2D(latitude: item.location?.lat ?? 0, longitude: item.location?.lng ?? 0)
     }
 
     public var title: String? {
-        return item.location.address
+        return item.location?.address
     }
 
     public var subtitle: String? {
