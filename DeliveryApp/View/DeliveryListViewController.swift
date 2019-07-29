@@ -84,12 +84,15 @@ class DeliveryListViewController: UIViewController {
     private func setupObservers() {
         self.observers = [
             deliveryListViewModel.observe(\DeliveryListViewModel.deliveryViewModels,
-                                          options: [.old, .new]) { [weak self] (_, _) in
-                                            self?.updateUIOnResponse()
-            }, deliveryListViewModel.observe(\DeliveryListViewModel.error,
-                                             options: [.old, .new]) { [weak self] (_, changedValue) in
-                                                self?.updateUIOnResponse(error: changedValue.newValue as? Error)
-            }
+                                          options: [.new]) { [weak self] (_, changedValue) in
+                                            self?.updateUIOnSuccess(changedValue.newValue ?? [])
+            }, deliveryListViewModel.observe(\DeliveryListViewModel.errorOccured,
+                                             options: [.new]) { [weak self] (_, changedValue) in
+                                                self?.updateUIOnError(changedValue.newValue as? Error)
+            }, deliveryListViewModel.observe(\DeliveryListViewModel.isLoadingData,
+                                             options: [.new], changeHandler: { [weak self] (_, changedValue) in
+                                                self?.showLoadingActivity(changedValue.newValue ?? false)
+            })
         ]
     }
 
@@ -99,21 +102,21 @@ class DeliveryListViewController: UIViewController {
         deliveryListViewModel.getDeliveries(refresh: true)
     }
 
-    // Update tableview data
-    func updateUIOnResponse(error: Error? = nil) {
-        if deliveryListViewModel.deliveryViewModels.count == 0 {
-            noDataFoundLabel.isHidden = false
-        } else {
-            noDataFoundLabel.isHidden = true
-        }
-        tableView.tableFooterView?.isHidden = true
-        refreshControl.endRefreshing()
+    // Update view data
+    func showLoadingActivity(_ value: Bool) {
+        tableView.tableFooterView?.isHidden = !value
+        if !value { refreshControl.endRefreshing() }
+    }
+
+    func updateUIOnSuccess(_ data: [Any]) {
+        noDataFoundLabel.isHidden = data.count > 0
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
-        if let error = error {
-            showBannerWith(subtitle: error.localizedDescription)
-        }
+    }
+
+    func updateUIOnError(_ error: Error?) {
+        showBannerWith(subtitle: error?.localizedDescription)
     }
 
     func pushDetailViewController(indexPath: IndexPath) {
@@ -123,21 +126,19 @@ class DeliveryListViewController: UIViewController {
         self.navigationController?.show(deliveryDetail, sender: true)
     }
 
-    func loadMoreData(numOfSections: Int, numOfRows: Int, indexPath: IndexPath) {
-        let lastSectionIndex = numOfSections - 1
-        let lastRowIndex = numOfRows - 1
-        // Check for last row of last section
-        if indexPath.section == lastSectionIndex &&
-            indexPath.row == lastRowIndex {
-            tableView.tableFooterView?.isHidden = false
-            deliveryListViewModel.getDeliveries(offset: numOfRows)
-        }
-    }
-
     deinit {
         _ = observers.map({$0.invalidate()})
     }
 
+}
+
+extension DeliveryListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (scrollView.contentOffset.y + 1) >= (scrollView.contentSize.height - scrollView.frame.size.height) {
+            //bottom reached
+            deliveryListViewModel.getDeliveries()
+        }
+    }
 }
 
 // Table view DataSource function
@@ -152,8 +153,6 @@ extension DeliveryListViewController: UITableViewDataSource {
             as? DeliveryTableViewCell else {
                 return UITableViewCell()
         }
-        let item = deliveryListViewModel.deliveryViewModels[indexPath.row]
-        cell.deliveryItem = item
         return cell
     }
 }
@@ -161,9 +160,10 @@ extension DeliveryListViewController: UITableViewDataSource {
 // Table view Delegate function
 extension DeliveryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let numOfSections = tableView.numberOfSections
-        let numOfRows = tableView.numberOfRows(inSection: numOfSections - 1)
-        loadMoreData(numOfSections: numOfSections, numOfRows: numOfRows, indexPath: indexPath)
+        if let cell = cell as? DeliveryTableViewCell {
+            let item = deliveryListViewModel.deliveryViewModels[indexPath.row]
+            cell.deliveryItem = item
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

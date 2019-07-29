@@ -41,7 +41,7 @@ class DeliveryListViewControllerTest: XCTestCase {
     func testRequiredElementSetup() {
         XCTAssertNotNil(deliveryListVC.navigationItem.title)
         XCTAssertNotNil(deliveryListVC.deliveryListViewModel)
-        XCTAssertEqual(deliveryListVC.observers.count, 2)
+        XCTAssertEqual(deliveryListVC.observers.count, 3)
     }
 
     func testTableViewDelegateDataSource() {
@@ -64,7 +64,7 @@ class DeliveryListViewControllerTest: XCTestCase {
     }
 
     func testShouldShowNoResultMessage () {
-        deliveryListVC.updateUIOnResponse()
+        deliveryListVC.updateUIOnSuccess([])
         if deliveryListVC.deliveryListViewModel.deliveryViewModels.count == 0 {
             XCTAssertFalse(deliveryListVC.noDataFoundLabel.isHidden)
         }
@@ -73,15 +73,8 @@ class DeliveryListViewControllerTest: XCTestCase {
     func testUpdateUI() {
         let delivery = createDummyDelivery()
         deliveryListVC.deliveryListViewModel.setListValues(deliveries: [delivery])
-        deliveryListVC.updateUIOnResponse()
+        deliveryListVC.updateUIOnSuccess(deliveryListVC.deliveryListViewModel.deliveryViewModels)
         XCTAssertTrue(deliveryListVC.noDataFoundLabel.isHidden)
-    }
-
-    func testUpdateUIOnError() {
-        deliveryListVC.deliveryListViewModel.deliveryViewModels = []
-        let error = NSError.init(domain: "Custom error", code: 500, userInfo: nil)
-        deliveryListVC.updateUIOnResponse(error: error)
-        XCTAssertFalse(deliveryListVC.noDataFoundLabel.isHidden)
     }
 
     func testControllerOnSelection() {
