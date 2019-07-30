@@ -24,8 +24,12 @@ class DeliveryViewModel: NSObject {
         return "\(item.id) "
     }
 
-    override var description: String {
+    var desc: String {
         return item.desc
+    }
+
+    var address: String {
+        return item.location.address
     }
 }
 // Confirm MKAnnotation for Map

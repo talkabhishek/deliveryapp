@@ -18,12 +18,22 @@ class DeliveryTableViewCell: UITableViewCell {
         didSet {
             if let item = deliveryItem {
                 self.deliveryItemImage.setImageWith(URL: item.imageURL)
-                self.deliveryItemLabel.text = item.description
+                self.deliveryItemDesc.text = item.desc
+                self.deliveryItemAddress.text = item.address
             }
         }
     }
 
-    private let deliveryItemLabel: UILabel = {
+    private let deliveryItemDesc: UILabel = {
+        let label = UILabel()
+        label.textColor = ColorConstant.cellText
+        label.font = FontConstant.systemRegular
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
+    }()
+
+    private let deliveryItemAddress: UILabel = {
         let label = UILabel()
         label.textColor = ColorConstant.cellText
         label.font = FontConstant.systemRegular
@@ -45,7 +55,8 @@ class DeliveryTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // code common to all your cells goes here
         contentView.addSubview(deliveryItemImage)
-        contentView.addSubview(deliveryItemLabel)
+        contentView.addSubview(deliveryItemDesc)
+        contentView.addSubview(deliveryItemAddress)
         setupViewConstraints(marginGuide: contentView.layoutMarginsGuide)
     }
 
@@ -64,19 +75,37 @@ class DeliveryTableViewCell: UITableViewCell {
                                  rightConstant: 0,
                                  widthConstant: 70,
                                  heightConstant: 70)
+        let imageBottomAnchor = deliveryItemImage.bottomAnchor
+            .constraint(equalTo: marginGuide.bottomAnchor, constant: -5)
+        imageBottomAnchor.priority = UILayoutPriority(rawValue: 500)
+        imageBottomAnchor.isActive = true
 
-        deliveryItemLabel.anchor(top: marginGuide.topAnchor,
+        deliveryItemDesc.anchor(top: marginGuide.topAnchor,
                                  left: deliveryItemImage.rightAnchor,
-                                 bottom: marginGuide.bottomAnchor,
+                                 bottom: nil,
                                  right: marginGuide.rightAnchor,
-                                 topConstant: 0,
+                                 topConstant: 5,
                                  leftConstant: 20,
                                  bottomConstant: 0,
-                                 rightConstant: 0,
+                                 rightConstant: 20,
                                  widthConstant: 0,
                                  heightConstant: 0)
 
-        deliveryItemLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
+        deliveryItemAddress.anchor(top: deliveryItemDesc.bottomAnchor,
+                                left: deliveryItemImage.rightAnchor,
+                                bottom: nil,
+                                right: marginGuide.rightAnchor,
+                                topConstant: 0,
+                                leftConstant: 20,
+                                bottomConstant: 0,
+                                rightConstant: 20,
+                                widthConstant: 0,
+                                heightConstant: 0)
+
+        let labelBottomAnchor = deliveryItemAddress.bottomAnchor
+            .constraint(greaterThanOrEqualTo: marginGuide.bottomAnchor, constant: -5)
+        labelBottomAnchor.priority = UILayoutPriority(rawValue: 1000)
+        //labelBottomAnchor.isActive = true
     }
 
 }
