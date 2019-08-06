@@ -30,13 +30,13 @@ class DeliveryItemView: UIView {
         let imgView = UIImageView(image: UIImage(named: "placeholder"))
         imgView.contentMode = .scaleAspectFill
         imgView.clipsToBounds = true
-        imgView.layer.cornerRadius = 5
+        imgView.layer.cornerRadius = ViewConstant.cornerRadius
         return imgView
     }()
 
     init(item: DeliveryViewModel) {
         super.init(frame: CGRect.zero)
-        self.layer.cornerRadius = 5
+        self.layer.cornerRadius = ViewConstant.cornerRadius
         self.layer.borderColor = ColorConstant.appTheme.cgColor
         self.layer.borderWidth = 0.5
         initializeSubViews()

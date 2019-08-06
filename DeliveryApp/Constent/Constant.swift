@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct PersistentContainer {
+struct XCDataModel {
     static let name = "DeliveryApp"
 }
 
@@ -38,9 +38,9 @@ struct ViewConstant {
 
 struct ColorConstant {
     static let appTheme: UIColor = UIColor(red: 209.0 / 255.0,
-                                                green: 138.0 / 255.0,
-                                                blue: 48.0 / 255.0,
-                                                alpha: 1.0)
+                                           green: 138.0 / 255.0,
+                                           blue: 48.0 / 255.0,
+                                           alpha: 1.0)
     static let navigationTint: UIColor = .white
     static let noDataText: UIColor = .lightGray
     static let cellText: UIColor = .black

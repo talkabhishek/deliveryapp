@@ -20,7 +20,7 @@ class DatabaseManagerTest: XCTestCase {
     }()
 
     private lazy var mockPersistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: PersistentContainer.name)
+        let container = NSPersistentContainer(name: XCDataModel.name)
         let description = NSPersistentStoreDescription()
         description.type = NSInMemoryStoreType
         description.shouldAddStoreAsynchronously = false
