@@ -10,6 +10,13 @@ import UIKit
 
 class DeliveryItemView: UIView {
 
+    var deliveryItem: DeliveryViewModel? {
+        didSet {
+            self.deliveryItemImage.setImageWith(URL: deliveryItem?.imageURL ?? "")
+            self.deliveryItemLabel.text = deliveryItem?.description
+        }
+    }
+
     private let deliveryItemLabel: UILabel = {
         let label = UILabel()
         label.textColor = ColorConstant.cellText
@@ -29,19 +36,28 @@ class DeliveryItemView: UIView {
 
     init(item: DeliveryViewModel) {
         super.init(frame: CGRect.zero)
-        self.backgroundColor = .white
         self.layer.cornerRadius = 5
         self.layer.borderColor = ColorConstant.appTheme.cgColor
         self.layer.borderWidth = 0.5
-        self.addSubview(deliveryItemImage)
-        self.addSubview(deliveryItemLabel)
+        initializeSubViews()
         deliveryItemImage.setImageWith(URL: item.imageURL)
         deliveryItemLabel.text = item.description
-        setupViewConstraints()
+    }
+
+    init() {
+        super.init(frame: CGRect.zero)
+        initializeSubViews()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func initializeSubViews() {
+        self.backgroundColor = .white
+        self.addSubview(deliveryItemImage)
+        self.addSubview(deliveryItemLabel)
+        setupViewConstraints()
     }
 
     func setupViewConstraints() {
