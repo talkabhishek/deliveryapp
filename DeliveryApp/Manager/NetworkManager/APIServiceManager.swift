@@ -9,9 +9,8 @@
 import Foundation
 import Alamofire
 
-typealias Callback<T> = (Result<T, Error>) -> Swift.Void
-
 protocol APIServiceManagerProtocol {
+    typealias Callback<T> = (Result<T, Error>) -> Swift.Void
     func getDeliveryList(offset: Int, limit: Int, completion: @escaping (Callback<[Delivery]>))
 }
 
