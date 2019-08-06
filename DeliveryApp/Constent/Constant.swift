@@ -37,9 +37,9 @@ struct ViewConstant {
 }
 
 struct ColorConstant {
-    static let appTheme: UIColor = UIColor(red: 209.0 / 255.0,
-                                           green: 138.0 / 255.0,
-                                           blue: 48.0 / 255.0,
+    static let appTheme: UIColor = UIColor(red: 175 / 255.0,
+                                           green: 75 / 255.0,
+                                           blue: 75 / 255.0,
                                            alpha: 1.0)
     static let navigationTint: UIColor = .white
     static let noDataText: UIColor = .lightGray

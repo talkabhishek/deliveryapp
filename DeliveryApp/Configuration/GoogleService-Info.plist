@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>239449882864-pd4dn0t9sm2l0uuglfamr67tt8hhqpqf.apps.googleusercontent.com</string>
+	<string>239449882864-7qnl1dge9ba501ace3sdmakuo3dff2pt.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.239449882864-pd4dn0t9sm2l0uuglfamr67tt8hhqpqf</string>
+	<string>com.googleusercontent.apps.239449882864-7qnl1dge9ba501ace3sdmakuo3dff2pt</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBbWpUyKMWME6LxWbPYVJg_kbzoKldfRKk</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>nagarro.lalamove</string>
+	<string>nagarro.DeliveryApp</string>
 	<key>PROJECT_ID</key>
 	<string>nagarrochallenge</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:239449882864:ios:6adffdfc98c6db07</string>
+	<string>1:239449882864:ios:8e524d1348f674f2</string>
 	<key>DATABASE_URL</key>
 	<string>https://nagarrochallenge.firebaseio.com</string>
 </dict>

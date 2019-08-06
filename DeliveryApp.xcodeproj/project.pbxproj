@@ -37,7 +37,6 @@
 		61F94B4F22D45DB00069E7FE /* DeliveryApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 61F94B4D22D45DB00069E7FE /* DeliveryApp.xcdatamodeld */; };
 		61F94B5122D45DB10069E7FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61F94B5022D45DB10069E7FE /* Assets.xcassets */; };
 		61F94B5422D45DB10069E7FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61F94B5222D45DB10069E7FE /* LaunchScreen.storyboard */; };
-		61F94B5F22D45DB10069E7FE /* DeliveryAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94B5E22D45DB10069E7FE /* DeliveryAppTests.swift */; };
 		61F94B7322D45E440069E7FE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94B6F22D45E440069E7FE /* Constant.swift */; };
 		61F94BFB22D465100069E7FE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BF922D465100069E7FE /* CoreDataStack.swift */; };
 		61F94BFE22D4663E0069E7FE /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F94BFC22D4663E0069E7FE /* UIImageViewExtension.swift */; };
@@ -92,7 +91,6 @@
 		61F94B5322D45DB10069E7FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61F94B5522D45DB10069E7FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61F94B5A22D45DB10069E7FE /* DeliveryAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeliveryAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		61F94B5E22D45DB10069E7FE /* DeliveryAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryAppTests.swift; sourceTree = "<group>"; };
 		61F94B6022D45DB10069E7FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61F94B6F22D45E440069E7FE /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		61F94BF922D465100069E7FE /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -290,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				6122967422DBA80900BCB1E9 /* Configuration */,
-				61F94B5E22D45DB10069E7FE /* DeliveryAppTests.swift */,
 				6122967622DC36E300BCB1E9 /* ManagerTest */,
 				6122967522DBA88E00BCB1E9 /* Resource */,
 				6122967822DC370200BCB1E9 /* ViewControllerTest */,
@@ -614,7 +611,6 @@
 				6122968822DC733600BCB1E9 /* MockCoreDataManager.swift in Sources */,
 				6122967E22DC3D1700BCB1E9 /* DeliveryListViewModelTest.swift in Sources */,
 				6122968022DC3D2D00BCB1E9 /* DeliveryViewModelTest.swift in Sources */,
-				61F94B5F22D45DB10069E7FE /* DeliveryAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
