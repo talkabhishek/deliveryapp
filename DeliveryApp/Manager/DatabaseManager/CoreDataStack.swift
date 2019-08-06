@@ -38,11 +38,9 @@ class CoreDataStack {
         return persistentContainer.newBackgroundContext()
     }
 
-    //lazy var managedContext: NSManagedObjectContext = persistentContainer.viewContext
     var managedContext: NSManagedObjectContext {
         let context = persistentContainer.viewContext
         context.automaticallyMergesChangesFromParent = true
-        //context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return context
     }
 

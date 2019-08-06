@@ -44,9 +44,7 @@ class DeliveryDetailViewController: UIViewController {
                                 topConstant: 0,
                                 leftConstant: 15,
                                 bottomConstant: 50,
-                                rightConstant: 15,
-                                widthConstant: 0,
-                                heightConstant: 0)
+                                rightConstant: 15)
     }
 }
 
