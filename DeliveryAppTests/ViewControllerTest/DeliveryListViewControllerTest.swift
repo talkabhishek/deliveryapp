@@ -64,7 +64,7 @@ class DeliveryListViewControllerTest: XCTestCase {
     }
 
     func testShouldShowNoResultMessage () {
-        deliveryListVC.updateUIOnSuccess([])
+        deliveryListVC.updateUIOnSuccess()
         if deliveryListVC.deliveryListViewModel.deliveryViewModels.count == 0 {
             XCTAssertFalse(deliveryListVC.noDataFoundLabel.isHidden)
         }
@@ -73,7 +73,7 @@ class DeliveryListViewControllerTest: XCTestCase {
     func testUpdateUI() {
         let delivery = createDummyDelivery()
         deliveryListVC.deliveryListViewModel.setListValues(deliveries: [delivery])
-        deliveryListVC.updateUIOnSuccess(deliveryListVC.deliveryListViewModel.deliveryViewModels)
+        deliveryListVC.updateUIOnSuccess()
         XCTAssertTrue(deliveryListVC.noDataFoundLabel.isHidden)
     }
 
