@@ -277,9 +277,9 @@
 				61F94B6922D45DC30069E7FE /* Extension */,
 				61625A7822D9B3FF0030658B /* Manager */,
 				61F94B6B22D45DD90069E7FE /* Model */,
-				61F94B6A22D45DCD0069E7FE /* Resource */,
 				61F94B6C22D45DDF0069E7FE /* View */,
 				61F94B6D22D45DE70069E7FE /* ViewModel */,
+				61F94B6A22D45DCD0069E7FE /* Resource */,
 			);
 			path = DeliveryApp;
 			sourceTree = "<group>";
