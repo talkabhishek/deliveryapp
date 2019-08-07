@@ -10,6 +10,7 @@ target 'DeliveryApp' do
   pod 'Firebase/Core', '~> 6.0'
   pod 'Fabric', '~> 1.10.2'
   pod 'Crashlytics', '~> 3.13.2'
+  #pod 'IHProgressHUD'
   pod 'NotificationBannerSwift', '~> 2.3.0'
 
   # Pods for DeliveryApp

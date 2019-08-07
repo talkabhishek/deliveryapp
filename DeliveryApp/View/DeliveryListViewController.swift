@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 
 class DeliveryListViewController: UIViewController {
     struct Constant {
