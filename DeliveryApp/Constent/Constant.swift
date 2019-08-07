@@ -17,23 +17,9 @@ struct Pagination {
     static let limit = 20
 }
 
-struct StringConstant {
-    static let deliveryListView = NSLocalizedString("Things to Deliver", comment: "")
-    static let delivertDetailView = NSLocalizedString("Delivery Details", comment: "")
-    static let titleText = NSLocalizedString("DeliveryApp", comment: "")
-    static let dismissText = NSLocalizedString("Ok", comment: "")
-    static let noDataFoundText = NSLocalizedString(#"""
-                                No Data Found.
-                                Pull down to refresh.
-                                """#, comment: "")
-}
-
 struct ViewConstant {
     static let cornerRadius: CGFloat = 5.0
-    static let zero: CGFloat = 0
-    static let activityDimention: CGFloat = 50
-    static let noDataLabelWidth: CGFloat = 300
-    static let noDataLabelHeight: CGFloat = 500
+    static let padding: CGFloat = 15
 }
 
 struct ColorConstant {
@@ -42,8 +28,6 @@ struct ColorConstant {
                                            blue: 75 / 255.0,
                                            alpha: 1.0)
     static let navigationTint: UIColor = .white
-    static let noDataText: UIColor = .lightGray
-    static let cellText: UIColor = .black
 }
 
 struct FontConstant {

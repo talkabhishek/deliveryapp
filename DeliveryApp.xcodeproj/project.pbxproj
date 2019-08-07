@@ -329,9 +329,9 @@
 		61F94B6C22D45DDF0069E7FE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				61625A9422DA4A7C0030658B /* DeliveryItemView.swift */,
 				61A0185622D5E43700403520 /* DeliveryTableViewCell.swift */,
 				61F94C0222D466570069E7FE /* DeliveryListViewController.swift */,
-				61625A9422DA4A7C0030658B /* DeliveryItemView.swift */,
 				61A0185422D5E42E00403520 /* DeliveryDetailViewController.swift */,
 			);
 			path = View;

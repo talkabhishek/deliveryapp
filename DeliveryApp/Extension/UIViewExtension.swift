@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView {
 
-    public func fillSuperview() {
+    func fillSuperview() {
         translatesAutoresizingMaskIntoConstraints = false
         if let superview = superview {
             leftAnchor.constraint(equalTo: superview.leftAnchor).isActive = true
@@ -20,55 +20,54 @@ extension UIView {
         }
     }
 
-    public func anchor(top: NSLayoutYAxisAnchor? = nil,
-                       left: NSLayoutXAxisAnchor? = nil,
-                       bottom: NSLayoutYAxisAnchor? = nil,
-                       right: NSLayoutXAxisAnchor? = nil,
-                       topConstant: CGFloat = 0,
-                       leftConstant: CGFloat = 0,
-                       bottomConstant: CGFloat = 0,
-                       rightConstant: CGFloat = 0,
-                       widthConstant: CGFloat = 0,
-                       heightConstant: CGFloat = 0) {
+    func anchor(top: NSLayoutYAxisAnchor? = nil,
+                left: NSLayoutXAxisAnchor? = nil,
+                bottom: NSLayoutYAxisAnchor? = nil,
+                right: NSLayoutXAxisAnchor? = nil,
+                paddingTop: CGFloat = 0,
+                paddingLeft: CGFloat = 0,
+                paddingBottom: CGFloat = 0,
+                paddingRight: CGFloat = 0,
+                widthConstant: CGFloat = 0,
+                heightConstant: CGFloat = 0) {
+
         translatesAutoresizingMaskIntoConstraints = false
 
-        var anchors = [NSLayoutConstraint]()
         if let top = top {
-            anchors.append(topAnchor.constraint(equalTo: top, constant: topConstant))
+            self.topAnchor.constraint(equalTo: top, constant: paddingTop).isActive = true
         }
         if let left = left {
-            anchors.append(leftAnchor.constraint(equalTo: left, constant: leftConstant))
-        }
-        if let bottom = bottom {
-            anchors.append(bottomAnchor.constraint(equalTo: bottom, constant: -bottomConstant))
+            self.leftAnchor.constraint(equalTo: left, constant: paddingLeft).isActive = true
         }
         if let right = right {
-            anchors.append(rightAnchor.constraint(equalTo: right, constant: -rightConstant))
+            rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
+        }
+        if let bottom = bottom {
+            bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom).isActive = true
         }
         if widthConstant > 0 {
-            anchors.append(widthAnchor.constraint(equalToConstant: widthConstant))
+            widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
         }
         if heightConstant > 0 {
-            anchors.append(heightAnchor.constraint(equalToConstant: heightConstant))
+            heightAnchor.constraint(equalToConstant: heightConstant).isActive = true
         }
-        anchors.forEach({$0.isActive = true})
     }
 
-    public func anchorCenterXToSuperview(constant: CGFloat = 0) {
+    func anchorCenterXToSuperview(constant: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
         if let anchor = superview?.centerXAnchor {
             centerXAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         }
     }
 
-    public func anchorCenterYToSuperview(constant: CGFloat = 0) {
+    func anchorCenterYToSuperview(constant: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
         if let anchor = superview?.centerYAnchor {
             centerYAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         }
     }
 
-    public func anchorCenterSuperview() {
+    func anchorCenterSuperview() {
         anchorCenterXToSuperview()
         anchorCenterYToSuperview()
     }

@@ -10,6 +10,20 @@ import UIKit
 import CoreData
 
 class DeliveryListViewController: UIViewController {
+    struct Constant {
+        static let title: String = NSLocalizedString("Things to Deliver", comment: "")
+        static let separatorColor: UIColor = ColorConstant.appTheme
+        static let zero: CGFloat = 0
+        static let activityDimention: CGFloat = 50
+        static let noDataLabelWidth: CGFloat = 300
+        static let noDataLabelHeight: CGFloat = 500
+        static let noDataLabelText: String = NSLocalizedString(#"""
+                                No Data Found.
+                                Pull down to refresh.
+                                """#, comment: "")
+        static let noDataLabelFont: UIFont = FontConstant.systemBold
+        static let noDataLabelColor: UIColor = .lightGray
+    }
     // MARK: - Instance variables
     var refreshControl = UIRefreshControl()
     var deliveryListViewModel: DeliveryListViewModel!
@@ -20,7 +34,7 @@ class DeliveryListViewController: UIViewController {
         tableView.register(DeliveryTableViewCell.self, forCellReuseIdentifier: DeliveryTableViewCell.identifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
-        tableView.separatorColor = ColorConstant.appTheme
+        tableView.separatorColor = Constant.separatorColor
         tableView.separatorInset = UIEdgeInsets.zero
         return tableView
     }()
@@ -28,21 +42,21 @@ class DeliveryListViewController: UIViewController {
     private let activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.startAnimating()
-        activityIndicator.frame = CGRect(x: ViewConstant.zero,
-                                         y: ViewConstant.zero,
-                                         width: ViewConstant.activityDimention,
-                                         height: ViewConstant.activityDimention)
+        activityIndicator.frame = CGRect(x: Constant.zero,
+                                         y: Constant.zero,
+                                         width: Constant.activityDimention,
+                                         height: Constant.activityDimention)
         return activityIndicator
     }()
 
     let noDataFoundLabel: UILabel = {
-        let infoLabel = UILabel(frame: CGRect(x: ViewConstant.zero,
-                                              y: ViewConstant.zero,
-                                              width: ViewConstant.noDataLabelWidth,
-                                              height: ViewConstant.noDataLabelHeight))
-        infoLabel.text = StringConstant.noDataFoundText
-        infoLabel.font = FontConstant.systemBold
-        infoLabel.textColor = ColorConstant.noDataText
+        let infoLabel = UILabel(frame: CGRect(x: Constant.zero,
+                                              y: Constant.zero,
+                                              width: Constant.noDataLabelWidth,
+                                              height: Constant.noDataLabelHeight))
+        infoLabel.text = Constant.noDataLabelText
+        infoLabel.font = Constant.noDataLabelFont
+        infoLabel.textColor = Constant.noDataLabelColor
         infoLabel.textAlignment = .center
         infoLabel.numberOfLines = 0
         return infoLabel
@@ -53,7 +67,7 @@ class DeliveryListViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.title = StringConstant.deliveryListView
+        navigationItem.title = Constant.title
         setupViews()
         deliveryListViewModel = DeliveryListViewModel()
         setupObservers()
@@ -71,8 +85,8 @@ class DeliveryListViewController: UIViewController {
 
         // Add no data view
         view.addSubview(noDataFoundLabel)
-        noDataFoundLabel.anchor(widthConstant: ViewConstant.noDataLabelWidth,
-                                heightConstant: ViewConstant.noDataLabelHeight)
+        noDataFoundLabel.anchor(widthConstant: Constant.noDataLabelWidth,
+                                heightConstant: Constant.noDataLabelHeight)
         noDataFoundLabel.anchorCenterSuperview()
         noDataFoundLabel.isHidden = true
 
@@ -84,8 +98,8 @@ class DeliveryListViewController: UIViewController {
     private func setupObservers() {
         self.observers = [
             deliveryListViewModel.observe(\DeliveryListViewModel.deliveryViewModels,
-                                          options: [.new]) { [weak self] (_, changedValue) in
-                                            self?.updateUIOnSuccess(changedValue.newValue ?? [])
+                                          options: [.new]) { [weak self] (_, _) in
+                                            self?.updateUIOnSuccess()
             }, deliveryListViewModel.observe(\DeliveryListViewModel.errorOccured,
                                              options: [.new]) { [weak self] (_, changedValue) in
                                                 self?.updateUIOnError(changedValue.newValue as? Error)
@@ -108,15 +122,20 @@ class DeliveryListViewController: UIViewController {
         if !value { refreshControl.endRefreshing() }
     }
 
-    func updateUIOnSuccess(_ data: [Any]) {
-        noDataFoundLabel.isHidden = data.count > 0
+    func updateUIOnSuccess() {
+        showHideNoData()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.reloadData()
     }
 
     func updateUIOnError(_ error: Error?) {
+        showHideNoData()
         showBannerWith(subtitle: error?.localizedDescription)
+    }
+
+    func showHideNoData() {
+        noDataFoundLabel.isHidden = deliveryListViewModel.deliveryViewModels.count > 0
     }
 
     func pushDetailViewController(indexPath: IndexPath) {

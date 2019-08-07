@@ -10,6 +10,11 @@ import UIKit
 import MapKit
 
 class DeliveryDetailViewController: UIViewController {
+    struct Constant {
+        static let title: String = NSLocalizedString("Delivery Details", comment: "")
+        static let padding: CGFloat = ViewConstant.padding
+        static let bottomPadding: CGFloat = 50
+    }
     // MARK: - Instance variables
     var deliveryItemViewModel: DeliveryViewModel!
     var mapView: MKMapView!
@@ -20,7 +25,7 @@ class DeliveryDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationItem.title = StringConstant.delivertDetailView
+        navigationItem.title = Constant.title
         self.view.backgroundColor = UIColor.white
 
         setupViews()
@@ -37,14 +42,12 @@ class DeliveryDetailViewController: UIViewController {
 
         deliveryInfoView = DeliveryItemView(item: deliveryItemViewModel)
         view.addSubview(deliveryInfoView)
-        deliveryInfoView.anchor(top: nil,
-                                left: view.leftAnchor,
+        deliveryInfoView.anchor(left: view.leftAnchor,
                                 bottom: view.bottomAnchor,
                                 right: view.rightAnchor,
-                                topConstant: 0,
-                                leftConstant: 15,
-                                bottomConstant: 50,
-                                rightConstant: 15)
+                                paddingLeft: Constant.padding,
+                                paddingBottom: Constant.bottomPadding,
+                                paddingRight: Constant.padding)
     }
 }
 

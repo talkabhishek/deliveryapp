@@ -10,6 +10,16 @@ import UIKit
 
 class DeliveryItemView: UIView {
 
+    struct Constant {
+        static let size: CGFloat = 70
+        static let padding: CGFloat = ViewConstant.padding
+        static let borderWidth: CGFloat = 0.5
+        static let borderColor: UIColor = ColorConstant.appTheme
+        static let textColor: UIColor = .black
+        static let textFont: UIFont = FontConstant.systemRegular
+        static let cornerRadius: CGFloat = ViewConstant.cornerRadius
+    }
+
     var deliveryItem: DeliveryViewModel? {
         didSet {
             self.deliveryItemImage.setImageWith(URL: deliveryItem?.imageURL ?? "")
@@ -19,8 +29,8 @@ class DeliveryItemView: UIView {
 
     private let deliveryItemLabel: UILabel = {
         let label = UILabel()
-        label.textColor = ColorConstant.cellText
-        label.font = FontConstant.systemRegular
+        label.textColor = Constant.textColor
+        label.font = Constant.textFont
         label.textAlignment = .left
         label.numberOfLines = 0
         return label
@@ -30,15 +40,15 @@ class DeliveryItemView: UIView {
         let imgView = UIImageView(image: UIImage(named: "placeholder"))
         imgView.contentMode = .scaleAspectFill
         imgView.clipsToBounds = true
-        imgView.layer.cornerRadius = ViewConstant.cornerRadius
+        imgView.layer.cornerRadius = Constant.cornerRadius
         return imgView
     }()
 
     init(item: DeliveryViewModel) {
         super.init(frame: CGRect.zero)
-        self.layer.cornerRadius = ViewConstant.cornerRadius
-        self.layer.borderColor = ColorConstant.appTheme.cgColor
-        self.layer.borderWidth = 0.5
+        self.layer.cornerRadius = Constant.cornerRadius
+        self.layer.borderColor = Constant.borderColor.cgColor
+        self.layer.borderWidth = Constant.borderWidth
         initializeSubViews()
         deliveryItemImage.setImageWith(URL: item.imageURL)
         deliveryItemLabel.text = item.description
@@ -61,30 +71,23 @@ class DeliveryItemView: UIView {
     }
 
     func setupViewConstraints() {
-        let marginGuide = self.layoutMarginsGuide
-        deliveryItemImage.anchor(top: marginGuide.topAnchor,
-                                 left: marginGuide.leftAnchor,
-                                 bottom: nil,
-                                 right: nil,
-                                 topConstant: 5,
-                                 leftConstant: 5,
-                                 bottomConstant: 0,
-                                 rightConstant: 0,
-                                 widthConstant: 70,
-                                 heightConstant: 70)
+        deliveryItemImage.anchor(top: topAnchor,
+                                 left: leftAnchor,
+                                 paddingTop: Constant.padding,
+                                 paddingLeft: Constant.padding,
+                                 widthConstant: Constant.size,
+                                 heightConstant: Constant.size)
 
-        deliveryItemLabel.anchor(top: marginGuide.topAnchor,
+        deliveryItemLabel.anchor(top: topAnchor,
                                  left: deliveryItemImage.rightAnchor,
-                                 bottom: marginGuide.bottomAnchor,
-                                 right: marginGuide.rightAnchor,
-                                 topConstant: 0,
-                                 leftConstant: 20,
-                                 bottomConstant: 0,
-                                 rightConstant: 0,
-                                 widthConstant: 0,
-                                 heightConstant: 0)
+                                 bottom: bottomAnchor,
+                                 right: rightAnchor,
+                                 paddingTop: Constant.padding,
+                                 paddingLeft: Constant.padding,
+                                 paddingBottom: Constant.padding,
+                                 paddingRight: Constant.padding)
 
-        deliveryItemLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
+        deliveryItemLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: Constant.size).isActive = true
     }
 
 }
