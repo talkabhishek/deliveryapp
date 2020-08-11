@@ -18,7 +18,7 @@ final class Configuration {
         return Environment.development
         #elseif STAGING
         return Environment.staging
-        #elseif PRODUCTION
+        #else
         return Environment.production
         #endif
     }()
@@ -27,6 +27,7 @@ final class Configuration {
 /*
  Open your Project Build Settings and search for “Swift Compiler – Custom Flags” … “Other Swift Flags”.
  Add “-DDEVELOPMENT” to the Debug section
+ Add “-DSTAGING” to the Staging section
  Add “-DPRODUCTION” to the Release section
  */
 enum Environment: String {

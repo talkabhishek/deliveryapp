@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 protocol APIServiceManagerProtocol {
-    typealias Callback<T> = (Result<T, Error>) -> Swift.Void
+    typealias Callback<T> = (Result<T, AFError>) -> Swift.Void
     func getDeliveryList(offset: Int, limit: Int, completion: @escaping (Callback<[Delivery]>))
 }
 
@@ -25,7 +25,8 @@ class APIServiceManager: APIServiceManagerProtocol {
                                  parameters: service.parameters,
                                  encoding: URLEncoding.queryString,
                                  headers: nil, interceptor: nil)
-        request.responseDecodable { (response: DataResponse<T>) in
+
+        request.responseDecodable(of: T.self, queue: .main, decoder: JSONDecoder()) { (response) in
             completion(response.result)
         }
     }
@@ -33,7 +34,7 @@ class APIServiceManager: APIServiceManagerProtocol {
     // MARK: - User API's
     func getDeliveryList(offset: Int, limit: Int, completion: @escaping (Callback<[Delivery]>)) {
         sendWebRequest(service: APIService.deliveries(offset: offset, limit:
-            limit)) { (response: Result<[Delivery], Error>) in
+            limit)) { (response: Result<[Delivery], AFError>) in
             completion(response)
         }
     }

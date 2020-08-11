@@ -67,7 +67,10 @@ class DeliveryListViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         navigationItem.title = Constant.title
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: .done, target: self, action: #selector(clearList))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear",
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(clearList))
         setupViews()
         deliveryListViewModel = DeliveryListViewModel()
         setupObservers()

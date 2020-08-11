@@ -26,7 +26,7 @@ class DatabaseManagerTest: XCTestCase {
 //        description.shouldAddStoreAsynchronously = false
 //        container.persistentStoreDescriptions = [description]
 
-        container.loadPersistentStores(completionHandler: { (description, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             // Check if the data store is in memory
 //            precondition( description.type == NSInMemoryStoreType )
             // Check if creating container wrong
