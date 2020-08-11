@@ -16,7 +16,9 @@ final class Configuration {
     lazy var env: Environment = {
         #if DEVELOPMENT
         return Environment.development
-        #else
+        #elseif STAGING
+        return Environment.staging
+        #elseif PRODUCTION
         return Environment.production
         #endif
     }()
@@ -30,12 +32,14 @@ final class Configuration {
 enum Environment: String {
     // Add each environment
     case development
+    case staging
     case production
 
     // Create envrionment based computed property like baseURL, APIKeys
     var baseURL: String {
         switch self {
         case .development: return "https://mock-api-mobile.dev.lalamove.com/"
+        case .staging: return "https://mock-api-mobile.dev.lalamove.com/"
         case .production: return "https://mock-api-mobile.dev.lalamove.com/"
         }
     }

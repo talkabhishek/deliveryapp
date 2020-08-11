@@ -469,26 +469,21 @@ open class Session {
     }
 
     func updateStatesForTask(_ task: URLSessionTask, request: Request) {
-        request.withState { (state) in
-            switch (startRequestsImmediately, state) {
-            case (true, .initialized):
-                rootQueue.async { request.resume() }
-            case (false, .initialized):
-                // Do nothing.
-                break
-            case (_, .resumed):
-                task.resume()
-                rootQueue.async { request.didResumeTask(task) }
-            case (_, .suspended):
-                task.suspend()
-                rootQueue.async { request.didSuspendTask(task) }
-            case (_, .cancelled):
-                task.cancel()
-                rootQueue.async { request.didCancelTask(task) }
-            case (_, .finished):
-                // Do nothing
-                break
-            }
+        switch (startRequestsImmediately, request.state) {
+        case (true, .initialized):
+            request.resume()
+        case (false, .initialized):
+            // Do nothing.
+            break
+        case (_, .resumed):
+            task.resume()
+            request.didResumeTask(task)
+        case (_, .suspended):
+            task.suspend()
+            request.didSuspendTask(task)
+        case (_, .cancelled):
+            task.cancel()
+            request.didCancelTask(task)
         }
     }
 
@@ -556,6 +551,64 @@ extension Session: RequestDelegate {
             }
         }
     }
+
+    public func cancelRequest(_ request: Request) {
+        rootQueue.async {
+            request.didCancel()
+
+            guard let task = self.requestTaskMap[request] else {
+                request.finish()
+                return
+            }
+
+            task.cancel()
+            request.didCancelTask(task)
+        }
+    }
+
+    public func cancelDownloadRequest(_ request: DownloadRequest, byProducingResumeData: @escaping (Data?) -> Void) {
+        rootQueue.async {
+            request.didCancel()
+
+            guard let downloadTask = self.requestTaskMap[request] as? URLSessionDownloadTask else {
+                request.finish()
+                return
+            }
+
+            downloadTask.cancel { (data) in
+                self.rootQueue.async {
+                    byProducingResumeData(data)
+                    request.didCancelTask(downloadTask)
+                }
+            }
+        }
+    }
+
+    public func suspendRequest(_ request: Request) {
+        rootQueue.async {
+            guard !request.isCancelled else { return }
+
+            request.didSuspend()
+
+            guard let task = self.requestTaskMap[request] else { return }
+
+            task.suspend()
+            request.didSuspendTask(task)
+        }
+    }
+
+    public func resumeRequest(_ request: Request) {
+        rootQueue.async {
+            guard !request.isCancelled else { return }
+
+            request.didResume()
+
+            guard let task = self.requestTaskMap[request] else { return }
+
+            task.resume()
+            request.didResumeTask(task)
+        }
+    }
 }
 
 // MARK: - SessionStateProvider
@@ -565,12 +618,8 @@ extension Session: SessionStateProvider {
         return requestTaskMap[task]
     }
 
-    public func didGatherMetricsForTask(_ task: URLSessionTask) {
-        requestTaskMap.disassociateIfNecessaryAfterGatheringMetricsForTask(task)
-    }
-
     public func didCompleteTask(_ task: URLSessionTask) {
-        requestTaskMap.disassociateIfNecessaryAfterCompletingTask(task)
+        requestTaskMap[task] = nil
     }
 
     public func credential(for task: URLSessionTask, in protectionSpace: URLProtectionSpace) -> URLCredential? {

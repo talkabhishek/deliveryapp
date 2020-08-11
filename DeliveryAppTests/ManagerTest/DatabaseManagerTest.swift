@@ -21,14 +21,14 @@ class DatabaseManagerTest: XCTestCase {
 
     private lazy var mockPersistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: XCDataModel.name)
-        let description = NSPersistentStoreDescription()
-        description.type = NSInMemoryStoreType
-        description.shouldAddStoreAsynchronously = false
-        container.persistentStoreDescriptions = [description]
+//        let description = NSPersistentStoreDescription()
+//        description.type = NSInMemoryStoreType
+//        description.shouldAddStoreAsynchronously = false
+//        container.persistentStoreDescriptions = [description]
 
         container.loadPersistentStores(completionHandler: { (description, error) in
             // Check if the data store is in memory
-            precondition( description.type == NSInMemoryStoreType )
+//            precondition( description.type == NSInMemoryStoreType )
             // Check if creating container wrong
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")

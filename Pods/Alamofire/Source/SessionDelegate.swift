@@ -30,7 +30,6 @@ protocol SessionStateProvider: AnyObject {
     var cachedResponseHandler: CachedResponseHandler? { get }
 
     func request(for task: URLSessionTask) -> Request?
-    func didGatherMetricsForTask(_ task: URLSessionTask)
     func didCompleteTask(_ task: URLSessionTask)
     func credential(for task: URLSessionTask, in protectionSpace: URLProtectionSpace) -> URLCredential?
     func cancelRequestsForSessionInvalidation(with error: Error?)
@@ -163,8 +162,6 @@ extension SessionDelegate: URLSessionTaskDelegate {
         eventMonitor?.urlSession(session, task: task, didFinishCollecting: metrics)
 
         stateProvider?.request(for: task)?.didGatherMetrics(metrics)
-
-        stateProvider?.didGatherMetricsForTask(task)
     }
 
     open func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

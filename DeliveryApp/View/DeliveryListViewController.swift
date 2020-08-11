@@ -67,6 +67,7 @@ class DeliveryListViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         navigationItem.title = Constant.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: .done, target: self, action: #selector(clearList))
         setupViews()
         deliveryListViewModel = DeliveryListViewModel()
         setupObservers()
@@ -119,6 +120,10 @@ class DeliveryListViewController: UIViewController {
     func showLoadingActivity(_ value: Bool) {
         tableView.tableFooterView?.isHidden = !value
         if !value { refreshControl.endRefreshing() }
+    }
+
+    @objc func clearList() {
+        deliveryListViewModel.clearList()
     }
 
     func updateUIOnSuccess() {

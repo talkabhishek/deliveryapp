@@ -23,9 +23,30 @@ class CoreDataManager: CoreDataManagerProtocol {
         let context = stack.savingContext
         let entityName: String = String(describing: DeliveryItem.self)
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let objects  = try? context.fetch(fetchRequest) as? [NSManagedObject]
-        _ = objects.map { $0.map { context.delete($0) } }
-        stack.saveContext(context: context)
+        // Clear with one object delete
+//        let objects  = try? context.fetch(fetchRequest) as? [NSManagedObject]
+//        _ = objects.map { $0.map { context.delete($0) } }
+//        stack.saveContext(context: context)
+
+        // Clear with delete query
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        _ = try? stack.persistentContainer.persistentStoreCoordinator.execute(deleteRequest, with: context)
+
+        do {
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            batchDeleteRequest.resultType = .resultTypeObjectIDs
+            // Executes batch
+            let result = try context.execute(batchDeleteRequest) as? NSBatchDeleteResult
+            // Retrieves the IDs deleted
+            guard let objectIDs = result?.result as? [NSManagedObjectID] else { return }
+            // Updates the main context
+            let changes: [AnyHashable: Any] = [
+                NSDeletedObjectsKey: objectIDs
+            ]
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [context])
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
 
     // Get Delivery Count
